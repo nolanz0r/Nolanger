@@ -4,7 +4,10 @@ require("dotenv").config();
 
 const PORT = process.env.APP_PORT || 3001;
 
+const auth = require("./routes/auth.route");
+
 app.use(express.json());
+app.use("/auth", auth);
 
 app.listen(PORT, (err) => {
   if (err) {
