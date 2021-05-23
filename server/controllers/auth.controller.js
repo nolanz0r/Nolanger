@@ -24,6 +24,7 @@ exports.login = (req, res) => {
           const payload = {
             id: user.id,
             name: user.name,
+            email: user.email,
           };
 
           jwt.sign(
@@ -79,6 +80,7 @@ exports.register = (req, res) => {
                 const payload = {
                   id: user.id,
                   name: user.name,
+                  email: user.email,
                 };
 
                 jwt.sign(
