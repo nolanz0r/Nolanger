@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const { check, validationResult } = require("express-validator");
+const { validationResult } = require("express-validator");
 
 const User = require("../models/user.model");
 
@@ -105,8 +105,4 @@ exports.register = (req, res) => {
   } catch (err) {
     console.log(err);
   }
-};
-
-exports.logout = (req, res) => {
-  res.send("login");
 };

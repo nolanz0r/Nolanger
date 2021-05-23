@@ -1,29 +1,30 @@
-import axios from "axios";
 import { FC, useEffect } from "react";
-import { setAuthToken } from "./utils/setAuthToken";
 import jwt_decode from "jwt-decode";
+import { Route, Switch } from "react-router-dom";
+
+import { Login } from "./pages/auth/Login";
+import { Register } from "./pages/auth/Register";
+
+import classes from "./assets/styles/App.module.css";
 
 export const App: FC = () => {
   useEffect(() => {
-    axios
-      .post("http://localhost:5000/auth/register", {
-        name: "Terry",
-        email: "terry@test.com",
-        password: "asd2dsa2sa",
-      })
-      .then((res) => {
-        const { token } = res.data;
+    const token = localStorage.getItem("jwtToken");
+    if (token) {
+      const decoded = jwt_decode(token);
 
-        localStorage.setItem("jwtToken", token);
-        setAuthToken(token);
-
-        const decoded = jwt_decode(token);
-
-        console.log(decoded);
-      });
+      console.log(decoded);
+    }
   }, []);
 
-  return <div className="App"></div>;
+  return (
+    <div className={classes.app}>
+      <Switch>
+        <Route path="/login" component={Login} />
+        <Route path="/register" component={Register} />
+      </Switch>
+    </div>
+  );
 };
 
 export default App;

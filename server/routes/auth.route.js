@@ -20,6 +20,5 @@ router
     ],
     authController.register
   );
-router.route("/logout").get(authController.logout);
 
 module.exports = router;
