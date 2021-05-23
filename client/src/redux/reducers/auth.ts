@@ -1,27 +1,25 @@
 import { IUser } from "../../interfaces/IUser";
 
-interface authState {
-    user: IUser,
+interface AuthAction {
+    type: string,
+    payload?: any
+}
+
+interface AuthState {
+    user?: IUser,
     loggedIn: boolean
 }
 
-const initialState: authState = {
-    user: {
-        id: "",
-        name: "",
-        email: ""
-    },
+const initialState: AuthState = {
     loggedIn: false
 };
 
-export const authReducer = (state = initialState, action: any) => {
+export const authReducer = (state = initialState, action: AuthAction): AuthState => {
     switch (action.type) {
         case "USER_DATA":
             return {
                 ...state,
-                user: {
 
-                },
             };
 
         default:
