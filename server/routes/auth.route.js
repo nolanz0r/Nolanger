@@ -13,7 +13,11 @@ router
 router
   .route("/register")
   .post(
-    [check("email").isEmail(), check("password").isLength(6)],
+    [
+      check("username").isExists(),
+      check("email").isEmail(),
+      check("password").isLength(6),
+    ],
     authController.register
   );
 router.route("/logout").get(authController.logout);
