@@ -14,7 +14,7 @@ router
   .route("/register")
   .post(
     [
-      check("username").isExists(),
+      check("name").exists(),
       check("email").isEmail(),
       check("password").isLength(6),
     ],

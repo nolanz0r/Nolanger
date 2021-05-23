@@ -6,7 +6,8 @@ import jwt_decode from "jwt-decode";
 export const App: FC = () => {
   useEffect(() => {
     axios
-      .post("http://localhost:5000/auth/login", {
+      .post("http://localhost:5000/auth/register", {
+        name: "Terry",
         email: "terry@test.com",
         password: "asd2dsa2sa",
       })
