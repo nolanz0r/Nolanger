@@ -37,7 +37,7 @@
 .showLoading {
   padding-left: 8px;
   opacity: 1;
-  width: 100%;
+  width: auto;
 }
 
 .hideLoading {
