@@ -1,15 +1,45 @@
 .button {
-  padding: 8px 20px;
+  position: relative;
+  padding: 0px 22px;
+  min-height: 34px;
   background: var(--secondary);
   color: var(--font);
   font-weight: 700;
+  font-size: 14px;
   border: none;
   outline: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .button:hover {
   opacity: 0.8;
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.loadingWrapper {
+  transition: all 0.2s ease-in-out;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  width: 0;
+}
+
+.showLoading {
+  padding-left: 8px;
+  opacity: 1;
+  width: 100%;
+}
+
+.hideLoading {
+  opacity: 0;
 }
