@@ -4,7 +4,7 @@ import classes from "./Button.module.css";
 
 interface ButtonProps {
   children: ReactNode;
-  onClick: () => void;
+  onClick?: () => void;
   disabled?: boolean;
   loading?: boolean;
 }
