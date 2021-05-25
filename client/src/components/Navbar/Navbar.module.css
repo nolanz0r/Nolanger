@@ -1,0 +1,14 @@
+.navbar {
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+  height: 80px;
+}
+
+.logout {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}

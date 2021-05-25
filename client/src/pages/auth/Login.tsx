@@ -9,15 +9,15 @@ import { loginAction } from "../../redux/actions/auth";
 import classes from "./Auth.module.css";
 import { ToastContainer } from "../../components/Toast/ToastContainer";
 
+interface IFormInputs {
+  email: string;
+  password: string;
+}
+
 export const Login: FC = () => {
   const dispatch = useDispatch<Dispatch<any>>();
   const { loading } = useSelector((state: any) => state.authReducer);
   const history = useHistory();
-
-  interface IFormInputs {
-    email: string;
-    password: string;
-  }
 
   const {
     register,
@@ -26,7 +26,7 @@ export const Login: FC = () => {
   } = useForm<IFormInputs>();
 
   const onSubmit: SubmitHandler<IFormInputs> = (data) => {
-    dispatch(loginAction(data));
+    dispatch(loginAction(data, history));
   };
 
   return (

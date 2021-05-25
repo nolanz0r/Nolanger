@@ -10,11 +10,13 @@ interface AuthState {
     user?: IUser,
     loggedIn: boolean,
     loading: boolean
+    errors: any[]
 }
 
 const initialState: AuthState = {
     loggedIn: false,
-    loading: false
+    loading: false,
+    errors: []
 };
 
 export const authReducer = (state = initialState, action: AuthAction): AuthState => {
@@ -32,7 +34,14 @@ export const authReducer = (state = initialState, action: AuthAction): AuthState
         case constants.FAIL_REQUEST:
             return {
                 ...state,
-                loading: false
+                loading: false,
+                errors: [...state.errors, action.payload]
+            };
+        case constants.SET_CURRENT_USER:
+            return {
+                ...state,
+                user: action.payload,
+                loggedIn: true
             };
         default:
             return state;

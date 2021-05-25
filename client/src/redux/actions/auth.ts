@@ -1,35 +1,40 @@
 import axios from "axios";
+import jwt_decode from "jwt-decode";
 import { Dispatch } from "react";
 import { IAuth } from "../../interfaces/IAuth";
+import { IUser } from "../../interfaces/IUser";
 import { setAuthToken } from "../../utils/setAuthToken";
 import { constants } from "../constants";
 
-const API_KEY: string = process.env.REACT_APP_API_KEY || ""
-
-export const loginAction = (values: IAuth) => {
+export const loginAction = (values: IAuth, history: any) => {
     return async (dispatch: Dispatch<any>) => {
-        try {
-            dispatch({
-                type: constants.AUTH_REQUEST,
+        dispatch({ type: constants.AUTH_REQUEST })
+
+        axios
+            .post("auth/login", values).then(res => {
+                const { token } = res.data;
+                if (token) {
+                    localStorage.setItem("jwtToken", token);
+
+                    setAuthToken(token);
+
+                    const decoded: IUser = jwt_decode(token);
+
+                    dispatch(setCurrentUser(decoded))
+
+                    dispatch({ type: constants.SUCCESS_REQUEST })
+                    history.push("/")
+                }
             })
-            
-            await axios.post(`${API_KEY}/auth/login`, values).then(res => {
+            .catch(err =>
+                dispatch({ type: constants.FAIL_REQUEST, payload: err.response.data.message })
+            );
+    };
+};
 
-
-                // const { token } = res.data;
-                // localStorage.setItem("jwtToken", token);
-
-                // setAuthToken(token);
-
-                console.log(res);
-
-
-                dispatch({ type: constants.SUCCESS_REQUEST })
-
-            })
-
-        } catch (err) {
-            dispatch({ type: constants.FAIL_REQUEST })
-        }
+export const setCurrentUser = (user: IUser) => {
+    return {
+        type: constants.SET_CURRENT_USER,
+        payload: user
     };
 };
