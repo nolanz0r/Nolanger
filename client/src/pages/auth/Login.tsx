@@ -16,7 +16,7 @@ interface IFormInputs {
 
 export const Login: FC = () => {
   const dispatch = useDispatch<Dispatch<any>>();
-  const { loading } = useSelector((state: any) => state.authReducer);
+  const { loading, error } = useSelector((state: any) => state.authReducer);
   const history = useHistory();
 
   const {
@@ -36,44 +36,51 @@ export const Login: FC = () => {
         onSubmit={handleSubmit(onSubmit)}
         noValidate
       >
-        <input
-          className={classes.input}
-          type="text"
-          placeholder="Email"
-          {...register("email", {
-            pattern: {
-              value: /^[\w-]+@([\w-]+\.)+[\w-]{2,4}$/,
-              message: "Invalid email",
-            },
-            required: {
-              value: true,
-              message: "You must enter your email",
-            },
-          })}
-        />
-        <input
-          className={classes.input}
-          type="password"
-          placeholder="Password"
-          {...register("password", {
-            minLength: {
-              value: 6,
-              message: "Your password must be at least 6 characters",
-            },
-            required: {
-              value: true,
-              message: "You must enter your password",
-            },
-          })}
-        />
+        <div className={classes.inputWrapper}>
+          <input
+            className={classes.input}
+            type="text"
+            placeholder="Email"
+            {...register("email", {
+              pattern: {
+                value: /^[\w-]+@([\w-]+\.)+[\w-]{2,4}$/,
+                message: "Invalid email",
+              },
+              required: {
+                value: true,
+                message: "You must enter your email",
+              },
+            })}
+          />
+          <span className={classes.error}>{errors.email?.message}</span>
+        </div>
+        <div className={classes.inputWrapper}>
+          <input
+            className={classes.input}
+            type="password"
+            placeholder="Password"
+            {...register("password", {
+              minLength: {
+                value: 6,
+                message: "Your password must be at least 6 characters",
+              },
+              required: {
+                value: true,
+                message: "You must enter your password",
+              },
+            })}
+          />
+          <span className={classes.error}>{errors.password?.message}</span>
+        </div>
         <div className={classes.formLinkWrapper}>
-          <Link className={classes.formLink} to="/forgetpassword">
-            Forget password?
+          <span className={classes.formSpan}>Don't have account?</span>
+          <Link className={classes.formLink} to="/register">
+            Sign up
           </Link>
         </div>
         <Button loading={loading}>Sign in</Button>
       </form>
-      <ToastContainer toasts={Object.values(errors)} />
+      {error && <ToastContainer toast={error} />}
     </>
   );
 };

@@ -1,3 +1,4 @@
+import { IError } from "../../interfaces/IError";
 import { IUser } from "../../interfaces/IUser";
 import { constants } from "../constants";
 
@@ -10,13 +11,12 @@ interface AuthState {
     user?: IUser,
     loggedIn: boolean,
     loading: boolean
-    errors: any[]
+    error?: IError
 }
 
 const initialState: AuthState = {
     loggedIn: false,
     loading: false,
-    errors: []
 };
 
 export const authReducer = (state = initialState, action: AuthAction): AuthState => {
@@ -35,13 +35,19 @@ export const authReducer = (state = initialState, action: AuthAction): AuthState
             return {
                 ...state,
                 loading: false,
-                errors: [...state.errors, action.payload]
+                error: action.payload
             };
         case constants.SET_CURRENT_USER:
             return {
                 ...state,
                 user: action.payload,
                 loggedIn: true
+            };
+        case constants.USER_LOGOUT:
+            return {
+                ...state,
+                user: undefined,
+                loggedIn: false
             };
         default:
             return state;

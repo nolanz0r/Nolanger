@@ -1,18 +1,16 @@
-import classes from "./Toast.module.css";
 import { FC } from "react";
 import { IToast, Toast } from "./Toast";
 
+import classes from "./Toast.module.css";
+
 interface IToastContainer {
-  toasts: IToast[] | undefined;
+  toast: IToast;
 }
 
-export const ToastContainer: FC<any> = ({ toasts }) => {
+export const ToastContainer: FC<IToastContainer> = ({ toast }) => {
   return (
     <div className={classes.toastContainer}>
-      {toasts &&
-        toasts.map((toast: IToast) => (
-          <Toast key={Math.random() * Date.now()}>{toast.message}</Toast>
-        ))}
+      <Toast>{toast}</Toast>
     </div>
   );
 };

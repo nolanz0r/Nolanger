@@ -1,5 +1,6 @@
 .form {
-  width: 30vw;
+  max-width: 550px;
+  width: 100%;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -12,20 +13,28 @@
   align-items: center;
 }
 
+.inputWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  margin-bottom: 5px;
+}
+
 .input {
   background: transparent;
   border: none;
   border-bottom: 2px solid var(--secondary);
   outline: none;
   color: var(--font);
-  padding: 8px 4px;
-  margin-bottom: 10px;
-  width: 70%;
+  padding: 12px 4px 2px;
+  width: 100%;
 }
 
 .formLinkWrapper {
   width: 70%;
   margin-bottom: 30px;
+  margin-top: 10px;
   padding: 0 4px;
 }
 
@@ -42,4 +51,12 @@
   font-size: 12px;
   opacity: 0.7;
   padding-right: 6px;
+}
+
+.error {
+  position: absolute;
+  bottom: -17px;
+  left: 4px;
+  color: var(--secondary);
+  font-size: 11px;
 }

@@ -1,5 +1,5 @@
-import { FC, ReactNode, useState } from "react";
-import { MdErrorOutline, MdClose } from "react-icons/md";
+import { FC, ReactNode } from "react";
+import { MdErrorOutline } from "react-icons/md";
 import classes from "./Toast.module.css";
 
 export interface IToast {

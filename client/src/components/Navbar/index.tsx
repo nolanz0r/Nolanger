@@ -1,18 +1,21 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import { FC } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { Dispatch } from "redux";
+import { logoutAction } from "../../redux/actions/auth";
 
 import { Button } from "../Button";
 import { Logo } from "../Logo";
 
 import classes from "./Navbar.module.css";
 
-export const Navbar = () => {
+export const Navbar: FC = () => {
+  const dispatch = useDispatch<Dispatch<any>>();
   const { user } = useSelector((state: any) => state.authReducer);
   const history = useHistory();
 
   const logoutHandler = () => {
-    // create action for user logout
+    dispatch(logoutAction(history));
   };
 
   return (
