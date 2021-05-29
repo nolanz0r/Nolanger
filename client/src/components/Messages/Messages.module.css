@@ -1,0 +1,87 @@
+.messages {
+  background: #fff;
+  width: 74vw;
+  height: 100%;
+  color: var(--main);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0 25px;
+}
+
+.header {
+  height: 10vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid var(--secondary);
+}
+
+.user {
+  display: flex;
+  align-items: center;
+}
+
+.text {
+  margin-left: 10px;
+  line-height: 14px;
+}
+
+.name {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.status {
+  font-size: 12px;
+  font-weight: 200;
+}
+
+.messagesBox {
+  overflow-y: scroll;
+  width: 100%;
+  height: 81%;
+  display: flex;
+  flex-direction: column-reverse;
+  padding: 0 20px;
+}
+
+.textForm {
+  border-top: 2px solid var(--secondary);
+  height: 7vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.textField {
+  height: 60%;
+  width: 100%;
+  font-size: 18px;
+  padding: 0 5px;
+  margin: 0 10px;
+  border: 1px solid #bbbbbb;
+  border-radius: 5px;
+  outline: none;
+}
+
+.icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 30px;
+  cursor: pointer;
+  color: var(--main);
+  transition: all 0.2s ease-in-out;
+}
+
+.icon:hover {
+  opacity: 0.8;
+}
+
+.sendIcon {
+  font-size: 36px;
+}

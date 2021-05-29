@@ -97,7 +97,9 @@ export const Register: FC = () => {
             Sign in
           </Link>
         </div>
-        <Button loading={loading}>Sign up</Button>
+        <Button loading={loading} disabled={loading}>
+          Sign up
+        </Button>
       </form>
       {error && <ToastContainer toast={error} />}
     </>

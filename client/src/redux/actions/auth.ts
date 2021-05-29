@@ -27,7 +27,9 @@ export const loginAction = (values: IAuth, history: any) => {
                 }
             })
             .catch(err =>
-                dispatch({ type: constants.FAIL_REQUEST, payload: err.response.data.message })
+                err.response
+                    ? dispatch({ type: constants.FAIL_REQUEST, payload: err.response.data.message })
+                    : dispatch({ type: constants.FAIL_REQUEST, payload: "No server response. Please try letter." })
             );
     };
 };
@@ -53,7 +55,9 @@ export const registerAction = (values: IAuth, history: any) => {
                 }
             })
             .catch(err =>
-                dispatch({ type: constants.FAIL_REQUEST, payload: err.response.data.message })
+                err.response.data
+                    ? dispatch({ type: constants.FAIL_REQUEST, payload: err.response.data.message })
+                    : dispatch({ type: constants.FAIL_REQUEST, payload: "No server response. Please try letter." })
             );
     };
 };
@@ -72,3 +76,9 @@ export const setCurrentUser = (user: IUser) => {
         payload: user
     };
 };
+
+export const removeErrorAction = () => {
+    return {
+        type: constants.REMOVE_ERROR
+    }
+}

@@ -49,6 +49,11 @@ export const authReducer = (state = initialState, action: AuthAction): AuthState
                 user: undefined,
                 loggedIn: false
             };
+        case constants.REMOVE_ERROR:
+            return {
+                ...state,
+                error: undefined
+            };
         default:
             return state;
     }

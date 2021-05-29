@@ -34,8 +34,9 @@ export const App: FC = () => {
         <>
           <Navbar />
           <Switch>
-            <Route exact path="/" component={Chat} />
-            <Redirect from="*" to="/" />
+            <Route exact path="/chat" component={Chat} />
+            <Route path="/chat/:id" component={Chat} />
+            <Redirect from="*" to="/chat" />
           </Switch>
         </>
       ) : (

@@ -78,7 +78,9 @@ export const Login: FC = () => {
             Sign up
           </Link>
         </div>
-        <Button loading={loading}>Sign in</Button>
+        <Button loading={loading} disabled={loading}>
+          Sign in
+        </Button>
       </form>
       {error && <ToastContainer toast={error} />}
     </>

@@ -1,8 +1,14 @@
 import { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { Dispatch } from "redux";
 import { logoutAction } from "../../redux/actions/auth";
+import { Avatar } from "../Avatar";
+import {
+  AiOutlineUsergroupAdd,
+  AiOutlineMessage,
+  AiOutlineSetting,
+} from "react-icons/ai";
 
 import { Button } from "../Button";
 import { Logo } from "../Logo";
@@ -21,10 +27,47 @@ export const Navbar: FC = () => {
   return (
     <header className={classes.navbar}>
       <Logo />
-      <div className={classes.logout}>
-        <span>{user && user.name}</span>
-        <Button onClick={logoutHandler}>Logout</Button>
-      </div>
+      <Button onClick={logoutHandler}>Logout</Button>
+      {/* 
+      <div className={classes.menu}>
+        <AiOutlineMenu className={classes.menuIcon} />
+      </div> */}
+      {/* <div className={classes.header}>
+        <Avatar src="https://html5css.ru/howto/img_avatar.png" size="80px" />
+        <div className={classes.text}>
+          <p className={classes.name}>{user.name}</p>
+          <p className={classes.email}>{user.email}</p>
+        </div>
+      </div> */}
+      {/* <ul className={classes.nav}>
+        <NavLink
+          className={classes.navItem}
+          activeClassName={classes.active}
+          to="/chat"
+        >
+          <AiOutlineMessage className={classes.navIcon} />
+          <span>Conversations</span>
+        </NavLink>
+        <NavLink
+          className={classes.navItem}
+          activeClassName={classes.active}
+          to="/find"
+        >
+          <AiOutlineUsergroupAdd className={classes.navIcon} />
+          <span>Find conversations</span>
+        </NavLink>
+        <NavLink
+          className={classes.navItem}
+          activeClassName={classes.active}
+          to="/settings"
+        >
+          <AiOutlineSetting className={classes.navIcon} />
+          <span>Settings</span>
+        </NavLink>
+        <div className={classes.logout}>
+          <Button onClick={logoutHandler}>Logout</Button>
+        </div>
+      </ul> */}
     </header>
   );
 };

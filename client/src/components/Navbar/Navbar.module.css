@@ -1,13 +1,77 @@
 .navbar {
+  position: relative;
+  background: var(--main);
+  width: 100%;
+  height: 70px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
-  height: 80px;
+  border-bottom: 2px solid var(--secondary);
+  padding: 0 25px;
 }
 
-.logout {
+.menu {
+  width: 100%;
+  height: 40px;
+  padding: 0 10px;
   display: flex;
-  gap: 15px;
+  justify-content: flex-end;
   align-items: center;
+}
+
+.menuIcon {
+  font-size: 26px;
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 0;
+}
+
+.text {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.name {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.email {
+  opacity: 0.7;
+  font-size: 12px;
+  font-weight: 200;
+}
+
+.nav {
+  list-style: none;
+  width: 100%;
+}
+
+.navItem {
+  padding: 0 12px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  transition: all 0.1s ease-in-out;
+}
+
+.navItem:hover {
+  background: var(--light-main);
+}
+
+.active {
+  background: var(--light-main);
+}
+
+.navIcon {
+  font-size: 24px;
+  margin-right: 5px;
 }
