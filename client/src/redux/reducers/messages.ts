@@ -3,12 +3,13 @@ import { constants } from "../constants";
 import { IAction } from "../store";
 
 interface MessagesState {
-    messages?: IMessage[],
+    messages: IMessage[],
     loading: boolean
 }
 
 const initialState: MessagesState = {
-    loading: true
+    messages: [],
+    loading: true,
 };
 
 export const messagesReducer = (state = initialState, action: IAction): MessagesState => {
@@ -29,6 +30,12 @@ export const messagesReducer = (state = initialState, action: IAction): Messages
                 ...state,
                 loading: false
             };
+
+        case constants.MESSAGES_ADD_MESSAGE:
+            return {
+                ...state,
+                messages: [...state.messages, action.payload]
+            }
         default:
             return state;
     }

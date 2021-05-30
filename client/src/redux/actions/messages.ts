@@ -1,5 +1,6 @@
 import axios from "axios";
 import { Dispatch } from "redux";
+import { IMessage } from "../../interfaces/IMessage";
 import { constants } from "../constants";
 
 export const getAllAction = (id: string) => {
@@ -19,12 +20,16 @@ export const getAllAction = (id: string) => {
 export const createAction = (id: string, conversationId: string, message: string) => {
     return async (dispatch: Dispatch<any>) => {
         axios
-            .post("message/create", { text: message, conversationId, id }).then(res => {
-                console.log(res.data);
-
-            })
+            .post("message/create", { text: message, conversationId, id })
             .catch(err =>
                 console.log(err.response)
             );
     };
 };
+
+export const addMessageAction = (message: IMessage) => {
+    return {
+        type: constants.MESSAGES_ADD_MESSAGE,
+        payload: message
+    }
+}

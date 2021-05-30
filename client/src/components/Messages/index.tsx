@@ -1,18 +1,25 @@
-import { ChangeEvent, FC, FormEvent, useEffect, useState } from "react";
+import { ChangeEvent, FC, FormEvent, useEffect, useRef, useState } from "react";
 import { AiOutlineSend, AiOutlinePaperClip } from "react-icons/ai";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch } from "redux";
+import { io } from "socket.io-client";
 
 import { MessageItem } from "../MessageItem";
 import { Avatar } from "../Avatar";
-import { createAction, getAllAction } from "../../redux/actions/messages";
+import {
+  addMessageAction,
+  createAction,
+  getAllAction,
+} from "../../redux/actions/messages";
 import { IMessage } from "../../interfaces/IMessage";
 
 import classes from "./Messages.module.css";
 
 export const Messages: FC = () => {
+  const socket = io("http://localhost:5000");
+  const bottomRef = useRef<HTMLUListElement>(null);
   const [message, setMessage] = useState<string>("");
   const dispatch = useDispatch<Dispatch<any>>();
   const { user } = useSelector((state: any) => state.authReducer);
@@ -27,13 +34,24 @@ export const Messages: FC = () => {
 
   const sendMessageHandler = (e: FormEvent<HTMLElement>) => {
     e.preventDefault();
-    dispatch(createAction(user.id, id, message));
+    message.length !== 0 && dispatch(createAction(user.id, id, message));
+
     setMessage("");
   };
 
   useEffect(() => {
     dispatch(getAllAction(id));
+
+    socket.on("SERVER:NEW_MESSAGE", (message) =>
+      dispatch(addMessageAction(message))
+    );
   }, [id]);
+
+  useEffect(() => {
+    if (bottomRef.current) {
+      bottomRef.current.scrollTo(0, 999999);
+    }
+  }, [messages]);
 
   return (
     <div className={classes.messages}>
@@ -52,7 +70,7 @@ export const Messages: FC = () => {
           <BiDotsVerticalRounded />
         </button>
       </div>
-      <ul className={classes.messagesBox}>
+      <ul className={classes.messagesBox} ref={bottomRef}>
         {!loading &&
           messages.map((message: IMessage) => (
             <MessageItem
@@ -75,7 +93,10 @@ export const Messages: FC = () => {
           value={message}
           onChange={inputChangeHandler}
         />
-        <button className={`${classes.icon} ${classes.sendIcon}`}>
+        <button
+          className={`${classes.icon} ${classes.sendIcon}`}
+          disabled={message.length === 0}
+        >
           <AiOutlineSend />
         </button>
       </form>

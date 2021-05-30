@@ -1,12 +1,13 @@
 import { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
 import { Dispatch } from "redux";
+
 import { IConversation } from "../../interfaces/IConversation";
 import { getAllAction } from "../../redux/actions/conversations";
 import { ConversationItem } from "../ConversationItem";
 import { Logo } from "../Logo";
 import { Search } from "../Search";
+
 import classes from "./Conversations.module.css";
 
 export const Conversations: FC = () => {
@@ -15,7 +16,6 @@ export const Conversations: FC = () => {
   const { conversations, loading } = useSelector(
     (state: any) => state.conversationsReducer
   );
-  const history = useHistory();
 
   useEffect(() => {
     dispatch(getAllAction(user.id));

@@ -13,6 +13,7 @@ import { setCurrentUser } from "./redux/actions/auth";
 import { IUser } from "./interfaces/IUser";
 import { Navbar } from "./components/Navbar";
 import { Chat } from "./pages/Chat";
+import { io } from "socket.io-client";
 
 axios.defaults.baseURL = process.env.REACT_APP_API_KEY;
 

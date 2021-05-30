@@ -1,13 +1,17 @@
 const Conversation = require("../models/conversation.model");
 const Message = require("../models/message.model");
 
-class ConversationController {
-  async getAll(req, res) {
+class MessageController {
+  constructor(io) {
+    this.io = io;
+  }
+
+  getAll(req, res) {
     const { conversationId } = req.body;
 
     Message.find({ conversation: conversationId })
       .populate(["conversation", "created_By"])
-      .exec(function (err, messages) {
+      .exec((err, messages) => {
         if (err) {
           return res.status(404).json({
             status: "error",
@@ -17,38 +21,44 @@ class ConversationController {
         res.json(messages);
       });
   }
-  async create(req, res) {
+  create(req, res) {
     const { id, text, conversationId } = req.body;
-
     const postData = {
       text: text,
       conversation: conversationId,
       created_By: id,
     };
-
     const message = new Message(postData);
-
     message
       .save()
       .then((message) => {
-        Conversation.findOneAndUpdate(
-          { _id: postData.conversation },
-          { lastMessage: message._id },
-          function (err) {
-            if (err) {
-              return res.status(500).json({
-                message: err,
-              });
-            }
+        message.populate(["conversation", "created_By"], (err, message) => {
+          if (err) {
+            return res.status(500).json({
+              message: err,
+            });
           }
-        );
 
-        res.status(200).json(message);
+          Conversation.findOneAndUpdate(
+            { _id: postData.conversation },
+            { lastMessage: message._id },
+            (err) => {
+              if (err) {
+                return res.status(500).json({
+                  message: err,
+                });
+              }
+            }
+          );
+
+          res.json(message);
+
+          this.io.emit("SERVER:NEW_MESSAGE", message);
+        });
       })
-      .catch((err) => {
-        res.status(500).json(err);
+      .catch((reason) => {
+        res.json(reason);
       });
   }
 }
-
-module.exports = new ConversationController();
+module.exports = MessageController;

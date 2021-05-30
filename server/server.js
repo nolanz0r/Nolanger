@@ -1,8 +1,16 @@
-const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const express = require("express");
 
-const app = express();
+const app = require("express")();
+const server = require("http").createServer(app);
+
+const io = require("socket.io")(server, {
+  cors: {
+    origin: "*",
+  },
+});
+
 require("dotenv").config();
 
 const PORT = process.env.APP_PORT || 3001;
@@ -13,7 +21,7 @@ app.use(cors());
 //routes
 const auth = require("./routes/auth.route");
 const conversation = require("./routes/conversation.route");
-const message = require("./routes/message.route");
+const message = require("./routes/message.route")(io);
 
 app.use("/auth", auth);
 app.use("/conversation", conversation);
@@ -28,7 +36,7 @@ mongoose
   .then(() => console.log("MongoDB successfully connected"))
   .catch((err) => console.log(err));
 
-app.listen(PORT, (err) => {
+server.listen(PORT, (err) => {
   if (err) {
     return console.log(err);
   }
