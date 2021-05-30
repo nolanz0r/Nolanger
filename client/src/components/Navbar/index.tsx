@@ -26,20 +26,21 @@ export const Navbar: FC = () => {
 
   return (
     <header className={classes.navbar}>
-      <Logo />
-      <Button onClick={logoutHandler}>Logout</Button>
-      {/* 
+      <div className={`${classes.navbarInner} container`}>
+        <Logo />
+        <Button onClick={logoutHandler}>Logout</Button>
+        {/* 
       <div className={classes.menu}>
         <AiOutlineMenu className={classes.menuIcon} />
       </div> */}
-      {/* <div className={classes.header}>
+        {/* <div className={classes.header}>
         <Avatar src="https://html5css.ru/howto/img_avatar.png" size="80px" />
         <div className={classes.text}>
           <p className={classes.name}>{user.name}</p>
           <p className={classes.email}>{user.email}</p>
         </div>
       </div> */}
-      {/* <ul className={classes.nav}>
+        {/* <ul className={classes.nav}>
         <NavLink
           className={classes.navItem}
           activeClassName={classes.active}
@@ -68,6 +69,7 @@ export const Navbar: FC = () => {
           <Button onClick={logoutHandler}>Logout</Button>
         </div>
       </ul> */}
+      </div>
     </header>
   );
 };

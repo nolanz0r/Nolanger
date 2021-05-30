@@ -30,13 +30,7 @@ class ConversationController {
 
     message
       .save()
-      .then((err, message) => {
-        if (err) {
-          return res.status(500).json({
-            message: err,
-          });
-        }
-
+      .then((message) => {
         Conversation.findOneAndUpdate(
           { _id: postData.conversation },
           { lastMessage: message._id },
@@ -49,10 +43,10 @@ class ConversationController {
           }
         );
 
-        res.json(message);
+        res.status(200).json(message);
       })
       .catch((err) => {
-        res.json(err);
+        res.status(500).json(err);
       });
   }
 }

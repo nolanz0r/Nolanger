@@ -1,11 +1,7 @@
 import { IError } from "../../interfaces/IError";
 import { IUser } from "../../interfaces/IUser";
 import { constants } from "../constants";
-
-interface AuthAction {
-    type: string,
-    payload?: any,
-}
+import { IAction } from "../store";
 
 interface AuthState {
     user?: IUser,
@@ -19,7 +15,7 @@ const initialState: AuthState = {
     loading: false,
 };
 
-export const authReducer = (state = initialState, action: AuthAction): AuthState => {
+export const authReducer = (state = initialState, action: IAction): AuthState => {
     switch (action.type) {
         case constants.AUTH_REQUEST:
             return {

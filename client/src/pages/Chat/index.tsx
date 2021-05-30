@@ -11,7 +11,7 @@ export const Chat: FC = () => {
   const { user } = useSelector((state: any) => state.authReducer);
 
   return (
-    <div className={classes.chat}>
+    <div className={`${classes.chat} container`}>
       <Conversations />
       <Switch>
         <Route exact path="/chat/" component={ChatStarter} />

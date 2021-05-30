@@ -1,6 +1,6 @@
 .conversations {
   position: relative;
-  width: 26vw;
+  width: 26%;
   height: 100%;
   background: var(--light-main);
   display: flex;

@@ -5,13 +5,19 @@ import classes from "./ConversationItem.module.css";
 
 interface IConversationItem {
   path: string;
+  message: string;
+  name: string;
 }
 
-export const ConversationItem: FC<IConversationItem> = ({ path }) => {
+export const ConversationItem: FC<IConversationItem> = ({
+  path,
+  message,
+  name,
+}) => {
   return (
     <NavLink
       className={classes.conversation}
-      to={"/chat" + path}
+      to={"/chat/" + path}
       activeClassName={classes.active}
     >
       <Avatar
@@ -21,8 +27,8 @@ export const ConversationItem: FC<IConversationItem> = ({ path }) => {
         size="54px"
       />
       <div className={classes.text}>
-        <p className={classes.name}>John Doe</p>
-        <p className={classes.message}>Lorem ipsum dolor sit amet.</p>
+        <p className={classes.name}>{name}</p>
+        <p className={classes.message}>{message}</p>
       </div>
     </NavLink>
   );
