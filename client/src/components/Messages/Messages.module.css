@@ -1,3 +1,12 @@
+.loader {
+  width: 74%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+}
+
 .messages {
   background: #fff;
   width: 74%;
@@ -6,7 +15,6 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 0 4px;
 }
 
 .header {
@@ -14,7 +22,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 2px solid var(--secondary);
+  border-bottom: 1px solid #bbbbbb;
   padding: 0 25px;
 }
 
@@ -44,12 +52,11 @@
   height: 81%;
   display: flex;
   flex-direction: column;
-  padding: 0 20px;
   padding: 0 25px;
 }
 
 .textForm {
-  border-top: 2px solid var(--secondary);
+  border-top: 1px solid #bbbbbb;
   height: 7vh;
   display: flex;
   justify-content: space-between;

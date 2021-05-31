@@ -22,10 +22,12 @@ app.use(cors());
 const auth = require("./routes/auth.route");
 const conversation = require("./routes/conversation.route");
 const message = require("./routes/message.route")(io);
+const user = require("./routes/user.route");
 
 app.use("/auth", auth);
 app.use("/conversation", conversation);
 app.use("/message", message);
+app.use("/users", user);
 
 mongoose
   .connect(process.env.MONGODB_KEY, {

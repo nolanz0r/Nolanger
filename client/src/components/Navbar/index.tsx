@@ -18,17 +18,11 @@ import classes from "./Navbar.module.css";
 export const Navbar: FC = () => {
   const dispatch = useDispatch<Dispatch<any>>();
   const { user } = useSelector((state: any) => state.authReducer);
-  const history = useHistory();
-
-  const logoutHandler = () => {
-    dispatch(logoutAction(history));
-  };
 
   return (
     <header className={classes.navbar}>
       <div className={`${classes.navbarInner} container`}>
         <Logo />
-        <Button onClick={logoutHandler}>Logout</Button>
         {/* 
       <div className={classes.menu}>
         <AiOutlineMenu className={classes.menuIcon} />

@@ -4,10 +4,10 @@ import { BiDotsVerticalRounded } from "react-icons/bi";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch } from "redux";
-import { io } from "socket.io-client";
 
 import { MessageItem } from "../MessageItem";
 import { Avatar } from "../Avatar";
+import socket from "../../core/socket";
 import {
   addMessageAction,
   createAction,
@@ -16,9 +16,9 @@ import {
 import { IMessage } from "../../interfaces/IMessage";
 
 import classes from "./Messages.module.css";
+import { Loader } from "../Loader";
 
 export const Messages: FC = () => {
-  const socket = io("http://localhost:5000");
   const bottomRef = useRef<HTMLUListElement>(null);
   const [message, setMessage] = useState<string>("");
   const dispatch = useDispatch<Dispatch<any>>();
@@ -41,10 +41,6 @@ export const Messages: FC = () => {
 
   useEffect(() => {
     dispatch(getAllAction(id));
-
-    socket.on("SERVER:NEW_MESSAGE", (message) =>
-      dispatch(addMessageAction(message))
-    );
   }, [id]);
 
   useEffect(() => {
@@ -53,53 +49,66 @@ export const Messages: FC = () => {
     }
   }, [messages]);
 
+  useEffect(() => {
+    socket.on("SERVER:NEW_MESSAGE", (message) =>
+      dispatch(addMessageAction(message))
+    );
+  }, []);
+
   return (
-    <div className={classes.messages}>
-      <div className={classes.header}>
-        <div className={classes.user}>
-          <Avatar
-            src="https://images.unsplash.com/photo-1556103255-4443dbae8e5a?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cGhvdG9ncmFwaGVyfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80"
-            size="70px"
-          />
-          <div className={classes.text}>
-            <p className={classes.name}>John Doe</p>
-            <span className={classes.status}>Online</span>
-          </div>
+    <>
+      {loading ? (
+        <div className={classes.loader}>
+          <Loader width="60px" color="#fd4d4d" />
         </div>
-        <button className={classes.icon}>
-          <BiDotsVerticalRounded />
-        </button>
-      </div>
-      <ul className={classes.messagesBox} ref={bottomRef}>
-        {!loading &&
-          messages.map((message: IMessage) => (
-            <MessageItem
-              key={message._id}
-              mine={user.id === message.created_By._id}
-              avatar="https://images.unsplash.com/photo-1556103255-4443dbae8e5a?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cGhvdG9ncmFwaGVyfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80"
-              name={message.created_By.name}
-              text={message.text}
+      ) : (
+        <div className={classes.messages}>
+          <div className={classes.header}>
+            <div className={classes.user}>
+              <Avatar
+                src="https://images.unsplash.com/photo-1556103255-4443dbae8e5a?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cGhvdG9ncmFwaGVyfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80"
+                size="70px"
+              />
+              <div className={classes.text}>
+                <p className={classes.name}>John Doe</p>
+                <span className={classes.status}>Online</span>
+              </div>
+            </div>
+            <button className={classes.icon}>
+              <BiDotsVerticalRounded />
+            </button>
+          </div>
+          <ul className={classes.messagesBox} ref={bottomRef}>
+            {messages.map((message: IMessage) => (
+              <MessageItem
+                key={message._id}
+                mine={user.id === message.created_By._id}
+                avatar="https://images.unsplash.com/photo-1556103255-4443dbae8e5a?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cGhvdG9ncmFwaGVyfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80"
+                name={message.created_By.name}
+                text={message.text}
+              />
+            ))}
+          </ul>
+          <form className={classes.textForm} onSubmit={sendMessageHandler}>
+            <button className={classes.icon}>
+              <AiOutlinePaperClip />
+            </button>
+            <input
+              className={classes.textField}
+              type="text"
+              placeholder="Message..."
+              value={message}
+              onChange={inputChangeHandler}
             />
-          ))}
-      </ul>
-      <form className={classes.textForm} onSubmit={sendMessageHandler}>
-        <button className={classes.icon}>
-          <AiOutlinePaperClip />
-        </button>
-        <input
-          className={classes.textField}
-          type="text"
-          placeholder="Message..."
-          value={message}
-          onChange={inputChangeHandler}
-        />
-        <button
-          className={`${classes.icon} ${classes.sendIcon}`}
-          disabled={message.length === 0}
-        >
-          <AiOutlineSend />
-        </button>
-      </form>
-    </div>
+            <button
+              className={`${classes.icon} ${classes.sendIcon}`}
+              disabled={message.length === 0}
+            >
+              <AiOutlineSend />
+            </button>
+          </form>
+        </div>
+      )}
+    </>
   );
 };

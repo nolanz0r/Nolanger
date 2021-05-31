@@ -1,3 +1,12 @@
+.loader {
+  width: 26%;
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--light-main);
+}
+
 .conversations {
   position: relative;
   width: 26%;
@@ -8,16 +17,65 @@
   flex-direction: column;
 }
 
-.searchWrapper {
-  height: 10vh;
+.logo {
+  bottom: 20px;
+  position: absolute;
+}
+
+.conversationInfo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   width: 100%;
-  padding: 25px;
+  height: 10vh;
+  padding: 0 15px;
+  border-bottom: 1px solid #bbbbbb;
+}
+
+.text {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.name {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+}
+
+.tooltip {
+  position: relative;
+  font-size: 24px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.logo {
-  bottom: 20px;
+.tooltip:before {
+  content: attr(data-tooltip);
   position: absolute;
+  top: 0%;
+  left: 50%;
+  transform: translate(-50%, -120%);
+  padding: 2px;
+  border-radius: 2px;
+  background: var(--secondary);
+  color: #fff;
+  text-align: center;
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+  pointer-events: none;
+  font-size: 13px;
+}
+
+.tooltip:hover:before {
+  opacity: 1;
 }

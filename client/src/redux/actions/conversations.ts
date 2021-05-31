@@ -15,3 +15,26 @@ export const getAllAction = (id: string) => {
             );
     };
 };
+
+export const createConversationAction = (author: string, partner: string, message: string) => {
+    return async (dispatch: Dispatch<any>) => {
+        dispatch({ type: constants.CREATE_CONVERSATION_REQUEST })
+
+        const data = {
+            author,
+            partner,
+            message,
+        }
+
+        console.log(data);
+
+
+        axios
+            .post("conversation/create", data).then(res => {
+                // dispatch({ type: constants.CONVERSATIONS_SUCCESS_REQUEST, payload: res.data })
+            })
+            .catch(err =>
+                console.log(err)
+            );
+    };
+};

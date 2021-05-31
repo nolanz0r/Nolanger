@@ -3,7 +3,7 @@
   align-items: center;
   height: 80px;
   width: 100%;
-  padding: 25px;
+  padding: 15px;
   transition: all 0.1s ease-in-out;
 }
 
@@ -13,7 +13,7 @@
 
 .active {
   background: #1f2630;
-  border-left: 3px solid var(--secondary);
+  border-left: 2px solid var(--secondary);
 }
 
 .text {

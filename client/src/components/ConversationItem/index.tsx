@@ -24,7 +24,7 @@ export const ConversationItem: FC<IConversationItem> = ({
         src={
           "https://i.pinimg.com/originals/19/3c/d0/193cd030fc246cf475c44d041b7feeb3.jpg"
         }
-        size="54px"
+        size="46px"
       />
       <div className={classes.text}>
         <p className={classes.name}>{name}</p>

@@ -14,7 +14,7 @@ class ConversationController {
           path: "user",
         },
       })
-      .exec(function (err, conversations) {
+      .exec((err, conversations) => {
         if (err) {
           return res.status(404).json({
             message: "Conversations not found",

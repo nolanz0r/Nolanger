@@ -1,12 +1,12 @@
 import { FC } from "react";
 import classes from "./Avatar.module.css";
 
-interface IAvatar {
+interface AvatarProps {
   src: string;
   size: string;
 }
 
-export const Avatar: FC<IAvatar> = ({ src, size }) => {
+export const Avatar: FC<AvatarProps> = ({ src, size }) => {
   return (
     <img
       className={classes.avatar}
