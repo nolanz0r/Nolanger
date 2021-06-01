@@ -66,7 +66,7 @@ export const logoutAction = (history: any) => {
     return async (dispatch: Dispatch<any>) => {
         localStorage.removeItem("jwtToken")
         dispatch({ type: constants.USER_LOGOUT })
-        history.push("/")
+        history.push("/login")
     };
 };
 

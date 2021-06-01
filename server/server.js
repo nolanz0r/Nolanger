@@ -15,15 +15,18 @@ require("dotenv").config();
 
 const PORT = process.env.APP_PORT || 3001;
 
+const authMiddleware = require("./middleware/authMiddleware");
+
+//middleware
 app.use(express.json());
 app.use(cors());
+app.use(authMiddleware);
 
 //routes
 const auth = require("./routes/auth.route");
 const conversation = require("./routes/conversation.route");
 const message = require("./routes/message.route")(io);
 const user = require("./routes/user.route");
-
 app.use("/auth", auth);
 app.use("/conversation", conversation);
 app.use("/message", message);

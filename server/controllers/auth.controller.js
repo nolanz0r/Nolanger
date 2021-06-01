@@ -4,54 +4,14 @@ const { validationResult } = require("express-validator");
 
 const User = require("../models/user.model");
 
-exports.login = (req, res) => {
-  try {
-    const { email, password } = req.body;
-
-    const errors = validationResult(req);
-
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
-
-    User.findOne({ email }).then((user) => {
-      if (!user) {
-        return res.status(404).json({ message: "Email not found" });
-      }
-
-      bcrypt.compare(password, user.password).then((isMatch) => {
-        if (isMatch) {
-          const payload = {
-            id: user.id,
-            name: user.name,
-            email: user.email,
-          };
-
-          jwt.sign(
-            payload,
-            process.env.JWT_SECRET,
-            {
-              expiresIn: 31556926,
-            },
-            (err, token) => {
-              res.json({
-                success: true,
-                token: "Bearer " + token,
-              });
-            }
-          );
-        } else {
-          return res.status(400).json({ message: "Password incorrect" });
-        }
-      });
-    });
-  } catch (err) {
-    console.log(err);
-  }
+const createJWT = (payload) => {
+  return jwt.sign(payload, process.env.JWT_SECRET, {
+    expiresIn: "24h",
+  });
 };
 
-exports.register = (req, res) => {
-  try {
+class ConversationController {
+  register(req, res) {
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
@@ -81,26 +41,48 @@ exports.register = (req, res) => {
                   email: user.email,
                 };
 
-                jwt.sign(
-                  payload,
-                  process.env.JWT_SECRET,
-                  {
-                    expiresIn: 31556926,
-                  },
-                  (err, token) => {
-                    res.json({
-                      success: true,
-                      token: "Bearer " + token,
-                    });
-                  }
-                );
+                const token = createJWT(payload);
+
+                res.status(200).json({ token: "Bearer " + token });
               })
               .catch((err) => console.log(err));
           });
         });
       }
     });
-  } catch (err) {
-    console.log(err);
   }
-};
+
+  login(req, res) {
+    const { email, password } = req.body;
+
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    User.findOne({ email }).then((user) => {
+      if (!user) {
+        return res.status(404).json({ message: "Email not found" });
+      }
+
+      bcrypt.compare(password, user.password).then((isMatch) => {
+        if (isMatch) {
+          const payload = {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+          };
+
+          const token = createJWT(payload);
+
+          res.status(200).json({ token: "Bearer " + token });
+        } else {
+          return res.status(400).json({ message: "Password incorrect" });
+        }
+      });
+    });
+  }
+}
+
+module.exports = new ConversationController();
