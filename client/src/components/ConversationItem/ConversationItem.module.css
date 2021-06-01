@@ -1,4 +1,5 @@
 .conversation {
+  position: relative;
   display: flex;
   align-items: center;
   height: 80px;
@@ -18,6 +19,7 @@
 
 .text {
   margin-left: 10px;
+  line-height: 17px;
 }
 
 .name {
@@ -26,7 +28,16 @@
 }
 
 .message {
-  font-size: 12px;
+  font-size: 13px;
   opacity: 0.7;
+  font-weight: 200;
+}
+
+.time {
+  position: absolute;
+  bottom: 3px;
+  right: 8px;
+  opacity: 0.6;
+  font-size: 12px;
   font-weight: 200;
 }

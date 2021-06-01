@@ -5,6 +5,7 @@ import thunk from "redux-thunk";
 import { authReducer } from "./reducers/auth";
 import { messagesReducer } from "./reducers/messages";
 import { conversationsReducer } from "./reducers/conversations";
+import { errorsReducer } from "./reducers/errors";
 
 export interface IAction {
     type: string,
@@ -12,9 +13,10 @@ export interface IAction {
 }
 
 const rootReducer = combineReducers({
-    authReducer,
-    messagesReducer,
-    conversationsReducer
+    auth: authReducer,
+    messages: messagesReducer,
+    conversations: conversationsReducer,
+    errors: errorsReducer
 });
 
 export const store = createStore(

@@ -40,9 +40,18 @@
 }
 
 .searchList {
+  height: 80%;
   width: 80%;
   margin-top: 30px;
   list-style: none;
+}
+
+.searchListLoader {
+  height: 80%;
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .searchItem {
@@ -50,6 +59,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 15px;
+}
+
+.searchName {
+  font-size: 17px;
 }
 
 .modalForm {

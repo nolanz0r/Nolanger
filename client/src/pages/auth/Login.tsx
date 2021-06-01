@@ -16,7 +16,7 @@ interface IFormInputs {
 
 export const Login: FC = () => {
   const dispatch = useDispatch<Dispatch<any>>();
-  const { loading, error } = useSelector((state: any) => state.authReducer);
+  const { loading, error } = useSelector((state: any) => state.auth);
   const history = useHistory();
 
   const {

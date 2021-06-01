@@ -16,13 +16,15 @@ import { Register } from "./pages/auth/Register";
 
 import classes from "./assets/styles/App.module.css";
 import { isAccessTokenExpired } from "./utils/isAccessTokenExpired";
+import { ToastContainer } from "./components/Toast/ToastContainer";
 
 axios.defaults.baseURL = process.env.REACT_APP_API_KEY;
 
 export const App: FC = () => {
   const dispatch = useDispatch<Dispatch<any>>();
   const history = useHistory();
-  const { loggedIn, user } = useSelector((state: any) => state.authReducer);
+  const { loggedIn } = useSelector((state: any) => state.auth);
+  const { error } = useSelector((state: any) => state.errors);
 
   useEffect(() => {
     const token = localStorage.getItem("jwtToken");
@@ -43,8 +45,7 @@ export const App: FC = () => {
         <>
           <Navbar />
           <Switch>
-            <Route exact path="/chat" component={Chat} />
-            <Route path="/chat/:id" component={Chat} />
+            <Route path="/chat" component={Chat} />
             <Redirect from="*" to="/chat" />
           </Switch>
         </>
@@ -55,6 +56,7 @@ export const App: FC = () => {
           <Redirect from="*" to="/login" />
         </Switch>
       )}
+      {error && <ToastContainer toast={error} />}
     </div>
   );
 };

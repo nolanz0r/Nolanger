@@ -3,7 +3,8 @@ import { FC, ReactNode } from "react";
 import { MdErrorOutline, MdClose } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { Dispatch } from "redux";
-import { removeErrorAction } from "../../redux/actions/auth";
+import { removeErrorAction } from "../../redux/actions/errors";
+
 import classes from "./Toast.module.css";
 
 export interface IToast {

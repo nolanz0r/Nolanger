@@ -26,11 +26,14 @@ export const loginAction = (values: IAuth, history: any) => {
                     history.push("/")
                 }
             })
-            .catch(err =>
-                err.response
-                    ? dispatch({ type: constants.FAIL_REQUEST, payload: err.response.data.message })
-                    : dispatch({ type: constants.FAIL_REQUEST, payload: "No server response. Please try letter." })
-            );
+            .catch(err => {
+                if (err.response) {
+                    dispatch({ type: constants.CATCH_ERROR, payload: err.response.data.message })
+                    dispatch({ type: constants.FAIL_REQUEST })
+                } else {
+                    dispatch({ type: constants.FAIL_REQUEST, payload: "No server response. Please try letter." })
+                }
+            });
     };
 };
 
@@ -54,11 +57,14 @@ export const registerAction = (values: IAuth, history: any) => {
                     history.push("/")
                 }
             })
-            .catch(err =>
-                err.response.data
-                    ? dispatch({ type: constants.FAIL_REQUEST, payload: err.response.data.message })
-                    : dispatch({ type: constants.FAIL_REQUEST, payload: "No server response. Please try letter." })
-            );
+            .catch(err => {
+                if (err.response) {
+                    dispatch({ type: constants.CATCH_ERROR, payload: err.response.data.message })
+                    dispatch({ type: constants.FAIL_REQUEST })
+                } else {
+                    dispatch({ type: constants.FAIL_REQUEST, payload: "No server response. Please try letter." })
+                }
+            });
     };
 };
 
@@ -76,9 +82,3 @@ export const setCurrentUser = (user: IUser) => {
         payload: user
     };
 };
-
-export const removeErrorAction = () => {
-    return {
-        type: constants.REMOVE_ERROR
-    }
-}

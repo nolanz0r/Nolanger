@@ -7,12 +7,14 @@ interface IConversationItem {
   path: string;
   message: string;
   name: string;
+  time: string;
 }
 
 export const ConversationItem: FC<IConversationItem> = ({
   path,
   message,
   name,
+  time,
 }) => {
   return (
     <NavLink
@@ -30,6 +32,7 @@ export const ConversationItem: FC<IConversationItem> = ({
         <p className={classes.name}>{name}</p>
         <p className={classes.message}>{message}</p>
       </div>
+      <span className={classes.time}>{time}</span>
     </NavLink>
   );
 };

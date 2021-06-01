@@ -18,38 +18,41 @@ class ConversationController {
       return res.status(400).json({ errors: errors.array() });
     }
 
-    User.findOne({ email: req.body.email }).then((user) => {
-      if (user) {
-        return res.status(400).json({ message: "Email already exists" });
-      } else {
-        const newUser = new User({
-          name: req.body.name,
-          email: req.body.email,
-          password: req.body.password,
-        });
-
-        bcrypt.genSalt(7, (err, salt) => {
-          bcrypt.hash(newUser.password, salt, (err, hash) => {
-            if (err) throw err;
-            newUser.password = hash;
-            newUser
-              .save()
-              .then((user) => {
-                const payload = {
-                  id: user.id,
-                  name: user.name,
-                  email: user.email,
-                };
-
-                const token = createJWT(payload);
-
-                res.status(200).json({ token: "Bearer " + token });
-              })
-              .catch((err) => console.log(err));
+    User.findOne(
+      { $or: [{ name: req.body.name }, { email: req.body.email }] },
+      (err, user) => {
+        if (user) {
+          return res.status(400).json({ message: "User already exists" });
+        } else {
+          const newUser = new User({
+            name: req.body.name,
+            email: req.body.email,
+            password: req.body.password,
           });
-        });
+
+          bcrypt.genSalt(7, (err, salt) => {
+            bcrypt.hash(newUser.password, salt, (err, hash) => {
+              if (err) throw err;
+              newUser.password = hash;
+              newUser
+                .save()
+                .then((user) => {
+                  const payload = {
+                    id: user.id,
+                    name: user.name,
+                    email: user.email,
+                  };
+
+                  const token = createJWT(payload);
+
+                  res.status(200).json({ token: "Bearer " + token });
+                })
+                .catch((err) => console.log(err));
+            });
+          });
+        }
       }
-    });
+    );
   }
 
   login(req, res) {

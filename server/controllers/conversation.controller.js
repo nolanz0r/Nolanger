@@ -3,7 +3,7 @@ const Message = require("../models/message.model");
 
 class ConversationController {
   async getAll(req, res) {
-    const { id } = req.body;
+    const { id } = req.user;
 
     Conversation.find()
       .or([{ author: id }, { partner: id }])

@@ -16,13 +16,14 @@ import { ConversationsDrawer } from "../ConversationsDrawer";
 import { sliceText } from "../../utils/sliceText";
 import { Avatar } from "../Avatar";
 import { Loader } from "../Loader";
+import { formatDate } from "../../utils/formatDate";
 
 export const Conversations: FC = () => {
   const [openDrawer, setOpenDrawer] = useState<boolean>(false);
   const dispatch = useDispatch<Dispatch<any>>();
-  const { user } = useSelector((state: any) => state.authReducer);
+  const { user } = useSelector((state: any) => state.auth);
   const { conversations, loading } = useSelector(
-    (state: any) => state.conversationsReducer
+    (state: any) => state.conversations
   );
   const history = useHistory();
 
@@ -39,7 +40,7 @@ export const Conversations: FC = () => {
   };
 
   useEffect(() => {
-    dispatch(getAllAction(user.id));
+    dispatch(getAllAction());
   }, []);
 
   return (
@@ -71,12 +72,13 @@ export const Conversations: FC = () => {
           <ConversationItem
             key={conversation._id}
             path={conversation._id}
-            message={sliceText(conversation.lastMessage.text, 27)}
+            message={sliceText(conversation.lastMessage.text, 32)}
             name={
               conversation.author._id === user.id
                 ? conversation.partner.name
                 : conversation.author.name
             }
+            time={formatDate(conversation.lastMessage.createdAt)}
           />
         ))
       )}
