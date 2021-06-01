@@ -10,13 +10,15 @@ import { IUser } from "./interfaces/IUser";
 import { Navbar } from "./components/Navbar";
 import { Chat } from "./pages/Chat";
 import { setAuthToken } from "./utils/setAuthToken";
-
+import { isAccessTokenExpired } from "./utils/isAccessTokenExpired";
+import { ToastContainer } from "./components/Toast/ToastContainer";
+import { Conversations } from "./pages/Conversations";
 import { Login } from "./pages/auth/Login";
 import { Register } from "./pages/auth/Register";
 
 import classes from "./assets/styles/App.module.css";
-import { isAccessTokenExpired } from "./utils/isAccessTokenExpired";
-import { ToastContainer } from "./components/Toast/ToastContainer";
+import socket from "./core/socket";
+import { addMessageAction } from "./redux/actions/messages";
 
 axios.defaults.baseURL = process.env.REACT_APP_API_KEY;
 
@@ -37,6 +39,9 @@ export const App: FC = () => {
         isAccessTokenExpired(decoded.exp) && dispatch(logoutAction(history));
       }
     }
+    socket.on("SERVER:NEW_MESSAGE", (message) =>
+      dispatch(addMessageAction(message))
+    );
   }, []);
 
   return (
@@ -45,7 +50,8 @@ export const App: FC = () => {
         <>
           <Navbar />
           <Switch>
-            <Route path="/chat" component={Chat} />
+            <Route exact path="/chat" component={Conversations} />
+            <Route path="/chat/:id" component={Chat} />
             <Redirect from="*" to="/chat" />
           </Switch>
         </>

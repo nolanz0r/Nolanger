@@ -2,9 +2,11 @@ import axios from "axios";
 import { Dispatch } from "redux";
 import { IMessage } from "../../interfaces/IMessage";
 import { constants } from "../constants";
+import { IAction } from "../store";
+import { catchErrorAction } from "./errors";
 
 export const getAllAction = (id: string) => {
-    return async (dispatch: Dispatch<any>) => {
+    return async (dispatch: Dispatch<IAction>) => {
         dispatch({ type: constants.MESSAGES_REQUEST })
 
         axios
@@ -18,12 +20,18 @@ export const getAllAction = (id: string) => {
 };
 
 export const createAction = (id: string, conversationId: string, message: string) => {
-    return async (dispatch: Dispatch<any>) => {
+    return async (dispatch: Dispatch<IAction>) => {
         axios
             .post("message/create", { text: message, conversationId, id })
-            .catch(err =>
-                console.log(err.response)
-            );
+            .catch(err => {
+                if (err.response) {
+                    dispatch(catchErrorAction(err.response.data.message))
+                    dispatch({ type: constants.CONVERSATIONS_FAIL_REQUEST })
+                } else {
+                    dispatch({ type: constants.CATCH_ERROR, payload: "No server response. Please try letter." })
+                    dispatch({ type: constants.CONVERSATIONS_FAIL_REQUEST })
+                }
+            });
     };
 };
 

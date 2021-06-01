@@ -5,9 +5,10 @@ import { IAuth } from "../../interfaces/IAuth";
 import { IUser } from "../../interfaces/IUser";
 import { setAuthToken } from "../../utils/setAuthToken";
 import { constants } from "../constants";
+import { IAction } from "../store";
 
 export const loginAction = (values: IAuth, history: any) => {
-    return async (dispatch: Dispatch<any>) => {
+    return async (dispatch: Dispatch<IAction>) => {
         dispatch({ type: constants.AUTH_REQUEST })
 
         axios
@@ -38,7 +39,7 @@ export const loginAction = (values: IAuth, history: any) => {
 };
 
 export const registerAction = (values: IAuth, history: any) => {
-    return async (dispatch: Dispatch<any>) => {
+    return async (dispatch: Dispatch<IAction>) => {
         dispatch({ type: constants.AUTH_REQUEST })
 
         axios
@@ -69,7 +70,7 @@ export const registerAction = (values: IAuth, history: any) => {
 };
 
 export const logoutAction = (history: any) => {
-    return async (dispatch: Dispatch<any>) => {
+    return async (dispatch: Dispatch<IAction>) => {
         localStorage.removeItem("jwtToken")
         dispatch({ type: constants.USER_LOGOUT })
         history.push("/login")
