@@ -22,7 +22,9 @@ class ConversationController {
       { $or: [{ name: req.body.name }, { email: req.body.email }] },
       (err, user) => {
         if (user) {
-          return res.status(400).json({ message: "User already exists" });
+          return res
+            .status(400)
+            .json({ message: "User with that name or email already exists" });
         } else {
           const newUser = new User({
             name: req.body.name,

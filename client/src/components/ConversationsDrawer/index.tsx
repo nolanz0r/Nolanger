@@ -1,6 +1,7 @@
 import axios from "axios";
-import { ChangeEvent, FC, SyntheticEvent, useState } from "react";
+import { ChangeEvent, FC, SyntheticEvent, useEffect, useState } from "react";
 import { HiOutlineArrowLeft } from "react-icons/hi";
+import { AiOutlineMessage } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch } from "redux";
 
@@ -26,8 +27,11 @@ export const ConversationsDrawer: FC<DrawerProps> = ({ state, close }) => {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [modalUser, setModalUser] = useState<IUser>();
   const [searchResults, setSearchResults] = useState<IUser[]>([]);
+  const [searchLength, setSearchLength] = useState<number>(0);
   const [searchText, setSearchText] = useState<string>("");
   const [messageText, setMessageText] = useState<string>("");
+  const [page, setPage] = useState<number>(0);
+  const [limit] = useState<number>(10);
 
   const openModalHandler = (user: IUser) => {
     setModalUser(user);
@@ -56,18 +60,39 @@ export const ConversationsDrawer: FC<DrawerProps> = ({ state, close }) => {
     setSearchText(e.target.value);
   };
 
-  const searchSubmitHandler = (e: SyntheticEvent) => {
-    e.preventDefault();
-
+  const searchUsers = (page: number) => {
     setLoading(true);
     axios
-      .post(`/users?search=${searchText}&page=1`)
+      .post(`/users?search=${searchText}&page=${page}&limit=${limit}`)
       .then((result) => {
-        setSearchResults(result.data);
+        setSearchResults(result.data.users);
+        setSearchLength(result.data.count);
         setLoading(false);
       })
-      .catch((err) => dispatch(catchErrorAction(err.response.data.message)));
+      .catch((err) => {
+        setLoading(false);
+        dispatch(catchErrorAction(err.response.data.message));
+        setSearchResults([]);
+        setPage(0);
+      });
   };
+
+  const prevPageHandler = () => {
+    setPage(page - 1);
+  };
+
+  const nextPageHandler = () => {
+    setPage(page + 1);
+  };
+
+  const searchSubmitHandler = (e: SyntheticEvent) => {
+    e.preventDefault();
+    searchUsers(page);
+  };
+
+  useEffect(() => {
+    searchText.length && searchUsers(page);
+  }, [page]);
 
   return (
     <>
@@ -93,10 +118,33 @@ export const ConversationsDrawer: FC<DrawerProps> = ({ state, close }) => {
             {searchResults.map((user: IUser) => (
               <li className={classes.searchItem} key={user._id}>
                 <span className={classes.searchName}>{user.name}</span>
-                <Button onClick={() => openModalHandler(user)}>Message</Button>
+                <Button onClick={() => openModalHandler(user)}>
+                  <AiOutlineMessage className={classes.icon} />
+                </Button>
               </li>
             ))}
           </ul>
+        )}
+        {searchResults.length !== 0 && (
+          <>
+            <div className={classes.buttons}>
+              <Button
+                onClick={prevPageHandler}
+                disabled={page === 0 || loading}
+              >
+                Prev
+              </Button>
+              <Button
+                onClick={nextPageHandler}
+                disabled={
+                  Math.ceil(searchLength / limit) === page + 1 || loading
+                }
+              >
+                Next
+              </Button>
+            </div>
+            <span>{page + 1 + "/" + Math.ceil(searchLength / limit)}</span>
+          </>
         )}
       </div>
       <Modal state={openModal} close={closeModalHandler}>

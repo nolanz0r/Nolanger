@@ -7,6 +7,17 @@
   background: var(--light-main);
 }
 
+.empty {
+  width: 100%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 15px;
+}
+
 .conversationsWrapper {
   height: calc(100% - 70px);
   display: flex;

@@ -6,4 +6,5 @@ export interface IConversation {
     lastMessage: IMessage
     author: IUser
     partner: IUser
+    count?: number
 }

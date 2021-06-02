@@ -18,6 +18,7 @@ import { Avatar } from "../../components/Avatar";
 import { Loader } from "../../components/Loader";
 import { formatDate } from "../../utils/formatDate";
 import { ChatStarter } from "../../components/ChatStarter";
+import { Button } from "../../components/Button";
 
 export const Conversations: FC = () => {
   const [openDrawer, setOpenDrawer] = useState<boolean>(false);
@@ -52,7 +53,7 @@ export const Conversations: FC = () => {
           <div className={classes.text}>
             <Avatar
               size="46px"
-              src="https://upload.wikimedia.org/wikipedia/commons/a/a0/Arh-avatar.jpg"
+              src="https://st4.depositphotos.com/4329009/19956/v/600/depositphotos_199564354-stock-illustration-creative-vector-illustration-default-avatar.jpg"
             />
             <span className={classes.name}>{user.name}</span>
           </div>
@@ -69,8 +70,7 @@ export const Conversations: FC = () => {
           <div className={classes.loader}>
             <Loader width="60px" color="#fd4d4d" />
           </div>
-        ) : (
-          conversations &&
+        ) : conversations.length ? (
           conversations.map((conversation: IConversation) => (
             <ConversationItem
               key={conversation._id}
@@ -84,6 +84,11 @@ export const Conversations: FC = () => {
               time={formatDate(conversation.lastMessage.createdAt)}
             />
           ))
+        ) : (
+          <div className={classes.empty}>
+            <h2>No conversations</h2>
+            <Button onClick={openDrawerHandler}>Search</Button>
+          </div>
         )}
         <div className={classes.logo}>
           <Logo />

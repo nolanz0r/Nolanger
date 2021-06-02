@@ -2,7 +2,7 @@ const Conversation = require("../models/conversation.model");
 const Message = require("../models/message.model");
 
 class ConversationController {
-  async getAll(req, res) {
+  getAll(req, res) {
     const { id } = req.user;
 
     Conversation.find()
@@ -24,7 +24,7 @@ class ConversationController {
       });
   }
 
-  async create(req, res) {
+  create(req, res) {
     const { author, partner, message } = req.body;
 
     Conversation.findOne(

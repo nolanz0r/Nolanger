@@ -26,7 +26,7 @@ export const getAllAction = () => {
 };
 
 export const createConversationAction = (author: string, partner: string, message: string) => {
-    return async (dispatch: Dispatch<IAction>) => {
+    return async (dispatch: Dispatch<any>) => {
         dispatch({ type: constants.CREATE_CONVERSATION_REQUEST })
 
         const data = {
@@ -37,6 +37,7 @@ export const createConversationAction = (author: string, partner: string, messag
 
         axios
             .post("conversation/create", data)
+            .then(res => dispatch(getAllAction()))
             .catch(err => {
                 if (err.response) {
                     dispatch(catchErrorAction(err.response.data.message))

@@ -13,6 +13,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
 }
 
 .openDrawer {
@@ -41,7 +42,7 @@
 
 .searchList {
   height: 80%;
-  width: 80%;
+  width: 85%;
   margin-top: 30px;
   list-style: none;
 }
@@ -59,7 +60,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 15px;
+  height: 10%;
 }
 
 .searchName {
@@ -101,4 +102,18 @@
 .modalButtons {
   display: flex;
   gap: 10px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  height: 10%;
+  width: 100%;
+}
+
+.icon {
+  font-size: 22px;
+  color: var(--font);
 }

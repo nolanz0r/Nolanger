@@ -53,7 +53,7 @@ export const Register: FC = () => {
               },
             })}
           />
-          <span className={classes.error}>{errors.password?.message}</span>
+          <span className={classes.error}>{errors.name?.message}</span>
         </div>
         <div className={classes.inputWrapper}>
           <input

@@ -19,6 +19,7 @@ import { Register } from "./pages/auth/Register";
 import classes from "./assets/styles/App.module.css";
 import socket from "./core/socket";
 import { addMessageAction } from "./redux/actions/messages";
+import { getAllAction } from "./redux/actions/conversations";
 
 axios.defaults.baseURL = process.env.REACT_APP_API_KEY;
 
@@ -39,9 +40,10 @@ export const App: FC = () => {
         isAccessTokenExpired(decoded.exp) && dispatch(logoutAction(history));
       }
     }
-    socket.on("SERVER:NEW_MESSAGE", (message) =>
-      dispatch(addMessageAction(message))
-    );
+    socket.on("SERVER:NEW_MESSAGE", (message) => {
+      dispatch(addMessageAction(message));
+      dispatch(getAllAction());
+    });
   }, []);
 
   return (

@@ -24,7 +24,7 @@ export const ConversationItem: FC<IConversationItem> = ({
     >
       <Avatar
         src={
-          "https://i.pinimg.com/originals/19/3c/d0/193cd030fc246cf475c44d041b7feeb3.jpg"
+          "https://st4.depositphotos.com/4329009/19956/v/600/depositphotos_199564354-stock-illustration-creative-vector-illustration-default-avatar.jpg"
         }
         size="46px"
       />

@@ -13,6 +13,7 @@ import { IMessage } from "../../interfaces/IMessage";
 import { Loader } from "../../components/Loader";
 
 import classes from "./Chat.module.css";
+import { IConversation } from "../../interfaces/IConversation";
 
 export const Chat: FC = () => {
   const bottomRef = useRef<HTMLUListElement>(null);
@@ -20,6 +21,7 @@ export const Chat: FC = () => {
   const dispatch = useDispatch<Dispatch<any>>();
   const { user } = useSelector((state: any) => state.auth);
   const { messages, loading } = useSelector((state: any) => state.messages);
+  const { conversations } = useSelector((state: any) => state.conversations);
   const { id } = useParams<{ id: string }>();
 
   const inputChangeHandler = (e: ChangeEvent<any>) => {
@@ -57,11 +59,19 @@ export const Chat: FC = () => {
             </Link>
             <div className={classes.user}>
               <Avatar
-                src="https://images.unsplash.com/photo-1556103255-4443dbae8e5a?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cGhvdG9ncmFwaGVyfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80"
+                src="https://st4.depositphotos.com/4329009/19956/v/600/depositphotos_199564354-stock-illustration-creative-vector-illustration-default-avatar.jpg"
                 size="66px"
               />
               <div className={classes.text}>
-                <p className={classes.name}>John Doe</p>
+                <p className={classes.name}>
+                  {conversations.map((item: IConversation) => {
+                    if (item._id === id) {
+                      return item.author._id === user.id
+                        ? item.partner.name
+                        : item.author.name;
+                    }
+                  })}
+                </p>
                 <span className={classes.status}>Online</span>
               </div>
             </div>
