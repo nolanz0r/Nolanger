@@ -27,7 +27,7 @@ export const MessageItem: FC<IMessageItem> = ({
       <p className={mine ? classes.rightText : classes.leftText}>
         {text}
         <span className={mine ? classes.rightTime : classes.leftTime}>
-          {formatDate(time).slice(13, 19)}
+          {formatDate(time).timeOnly()}
         </span>
       </p>
     </li>

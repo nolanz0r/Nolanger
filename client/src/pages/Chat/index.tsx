@@ -1,4 +1,12 @@
-import { ChangeEvent, FC, FormEvent, useEffect, useRef, useState } from "react";
+import {
+  ChangeEvent,
+  FC,
+  FormEvent,
+  SyntheticEvent,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { AiOutlineSend, AiOutlinePaperClip } from "react-icons/ai";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import { HiOutlineArrowLeft } from "react-icons/hi";
@@ -14,7 +22,7 @@ import { Loader } from "../../components/Loader";
 
 import classes from "./Chat.module.css";
 import { IConversation } from "../../interfaces/IConversation";
-import socket from "../../core/socket";
+import { EmojiMenu } from "../../components/EmojiMenu";
 
 export const Chat: FC = () => {
   const bottomRef = useRef<HTMLUListElement>(null);
@@ -35,6 +43,10 @@ export const Chat: FC = () => {
     message.length !== 0 && dispatch(createAction(user._id, id, message));
 
     setMessage("");
+  };
+
+  const addEmojiHandler = (e: any) => {
+    setMessage(message + e.target.innerHTML);
   };
 
   useEffect(() => {
@@ -97,6 +109,7 @@ export const Chat: FC = () => {
             <button className={classes.icon}>
               <AiOutlinePaperClip />
             </button>
+            <EmojiMenu onClick={addEmojiHandler} />
             <input
               className={classes.textField}
               type="text"

@@ -2,7 +2,6 @@ import axios from "axios";
 import { Dispatch } from "redux";
 import { IConversation } from "../../interfaces/IConversation";
 import { IMessage } from "../../interfaces/IMessage";
-import { sortConversationByDate } from "../../utils/sortConversationByDate";
 import { constants } from "../constants";
 import { IAction } from "../store";
 import { catchErrorAction } from "./errors";
@@ -13,7 +12,7 @@ export const getAllAction = () => {
 
         axios
             .get("conversation/getAll").then(res => {
-                dispatch({ type: constants.CONVERSATIONS_SUCCESS_REQUEST, payload: sortConversationByDate(res.data).reverse() })
+                dispatch({ type: constants.CONVERSATIONS_SUCCESS_REQUEST, payload: res.data })
             })
             .catch(err => {
                 if (err.response) {

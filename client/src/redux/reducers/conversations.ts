@@ -1,5 +1,6 @@
 import { IConversation } from "../../interfaces/IConversation";
 import { IMessage } from "../../interfaces/IMessage";
+import { sortConversationByDate } from "../../utils/sortConversationByDate";
 import { constants } from "../constants";
 import { IAction } from "../store";
 
@@ -24,7 +25,7 @@ export const conversationsReducer = (state = initialState, action: IAction): Con
             return {
                 ...state,
                 loading: false,
-                conversations: action.payload
+                conversations: sortConversationByDate(action.payload)
             };
         case constants.CONVERSATIONS_FAIL_REQUEST:
             return {
@@ -56,7 +57,7 @@ export const conversationsReducer = (state = initialState, action: IAction): Con
 
             return {
                 ...state,
-                conversations: updated
+                conversations: sortConversationByDate(updated)
             }
         default:
             return state;

@@ -1,0 +1,39 @@
+.emojis {
+  position: relative;
+}
+
+.emojisList {
+  position: absolute;
+  bottom: 47px;
+  opacity: 1;
+  transition: all 0.2s ease-in-out;
+  width: 210px;
+  height: 150px;
+  overflow-y: scroll;
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  background: var(--light-main);
+  padding: 9px;
+  -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.67);
+  box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.67);
+}
+
+.emojisListHide {
+  opacity: 0;
+}
+
+.emoji {
+  font-size: 18px;
+  transition: all 0.2s ease-in-out;
+  z-index: 50;
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  text-align: center;
+  margin: 4px;
+}
+
+.emoji:hover {
+  opacity: 0.8;
+}

@@ -1,0 +1,142 @@
+[
+  { "unicode": "😃", "tags": ["face", "mouth", "open", "smile"] },
+  { "unicode": "😄", "tags": ["eye", "face", "mouth", "open", "smile"] },
+  { "unicode": "😁", "tags": ["eye", "face", "grin", "smile"] },
+  { "unicode": "😅", "tags": ["cold", "face", "open", "smile", "sweat"] },
+  { "unicode": "🤣", "tags": ["face", "floor", "laugh", "rolling"] },
+  { "unicode": "😂", "tags": ["face", "joy", "laugh", "tear"] },
+  { "unicode": "🙂", "tags": ["face", "smile"] },
+  { "unicode": "🙃", "tags": ["face", "upside-down"] },
+  { "unicode": "😉", "tags": ["face", "wink"] },
+  { "unicode": "😊", "tags": ["blush", "eye", "face", "smile"] },
+  {
+    "unicode": "😇",
+    "tags": ["angel", "face", "fantasy", "halo", "innocent"]
+  },
+  { "unicode": "🥰", "tags": ["adore", "crush", "hearts", "in love"] },
+  { "unicode": "😍", "tags": ["eye", "face", "love", "smile"] },
+  { "unicode": "🤩", "tags": ["eyes", "face", "grinning", "star"] },
+  { "unicode": "😘", "tags": ["face", "kiss"] },
+  { "unicode": "😗", "tags": ["face", "kiss"] },
+  { "unicode": "😚", "tags": ["closed", "eye", "face", "kiss"] },
+  { "unicode": "😙", "tags": ["eye", "face", "kiss", "smile"] },
+  {
+    "unicode": "😋",
+    "tags": ["delicious", "face", "savouring", "smile", "yum"]
+  },
+  { "unicode": "😛", "tags": ["face", "tongue"] },
+  { "unicode": "😜", "tags": ["eye", "face", "joke", "tongue", "wink"] },
+  { "unicode": "🤪", "tags": ["eye", "goofy", "large", "small"] },
+  { "unicode": "😝", "tags": ["eye", "face", "horrible", "taste", "tongue"] },
+  { "unicode": "🤑", "tags": ["face", "money", "mouth"] },
+  { "unicode": "🤗", "tags": ["face", "hug", "hugging"] },
+  { "unicode": "🤭", "tags": ["whoops"] },
+  { "unicode": "🤫", "tags": ["quiet", "shush"] },
+  { "unicode": "🤔", "tags": ["face", "thinking"] },
+  { "unicode": "🤐", "tags": ["face", "mouth", "zipper"] },
+  { "unicode": "🤨", "tags": ["distrust", "skeptic"] },
+  { "unicode": "😐️", "tags": ["deadpan", "face", "meh", "neutral"] },
+  {
+    "unicode": "😑",
+    "tags": ["expressionless", "face", "inexpressive", "meh", "unexpressive"]
+  },
+  { "unicode": "😏", "tags": ["face", "smirk"] },
+  { "unicode": "😒", "tags": ["face", "unamused", "unhappy"] },
+  { "unicode": "🙄", "tags": ["eyeroll", "eyes", "face", "rolling"] },
+  { "unicode": "😬", "tags": ["face", "grimace"] },
+  { "unicode": "🤥", "tags": ["face", "lie", "pinocchio"] },
+  { "unicode": "😌", "tags": ["face", "relieved"] },
+  { "unicode": "😔", "tags": ["dejected", "face", "pensive"] },
+  { "unicode": "😪", "tags": ["face", "sleep"] },
+  { "unicode": "🤤", "tags": ["drooling", "face"] },
+  { "unicode": "😴", "tags": ["face", "sleep", "zzz"] },
+  { "unicode": "😷", "tags": ["cold", "doctor", "face", "mask", "sick"] },
+  { "unicode": "🤒", "tags": ["face", "ill", "sick", "thermometer"] },
+  { "unicode": "🤕", "tags": ["bandage", "face", "hurt", "injury"] },
+  { "unicode": "🤢", "tags": ["face", "nauseated", "vomit"] },
+  { "unicode": "🤮", "tags": ["sick", "vomit"] },
+  {
+    "unicode": "🥵",
+    "tags": ["feverish", "heat stroke", "hot", "red-faced", "sweating"]
+  },
+  {
+    "unicode": "🥶",
+    "tags": ["blue-faced", "cold", "freezing", "frostbite", "icicles"]
+  },
+  {
+    "unicode": "🥴",
+    "tags": ["dizzy", "intoxicated", "tipsy", "uneven eyes", "wavy mouth"]
+  },
+  { "unicode": "😵", "tags": ["dizzy", "face"] },
+  {
+    "unicode": "😎",
+    "tags": ["bright", "cool", "face", "sun", "sunglasses"]
+  },
+  { "unicode": "😟", "tags": ["face", "worried"] },
+  { "unicode": "🙁", "tags": ["face", "frown"] },
+  { "unicode": "☹️", "tags": ["face", "frown"] },
+  { "unicode": "😮", "tags": ["face", "mouth", "open", "sympathy"] },
+  { "unicode": "😯", "tags": ["face", "hushed", "stunned", "surprised"] },
+  { "unicode": "😲", "tags": ["astonished", "face", "shocked", "totally"] },
+  { "unicode": "😳", "tags": ["dazed", "face", "flushed"] },
+  { "unicode": "🥺", "tags": ["begging", "mercy", "puppy eyes"] },
+  { "unicode": "😦", "tags": ["face", "frown", "mouth", "open"] },
+  { "unicode": "😧", "tags": ["anguished", "face"] },
+  { "unicode": "😨", "tags": ["face", "fear", "fearful", "scared"] },
+  { "unicode": "😰", "tags": ["blue", "cold", "face", "rushed", "sweat"] },
+  { "unicode": "😥", "tags": ["disappointed", "face", "relieved", "whew"] },
+  { "unicode": "😢", "tags": ["cry", "face", "sad", "tear"] },
+  { "unicode": "😭", "tags": ["cry", "face", "sad", "sob", "tear"] },
+  { "unicode": "😱", "tags": ["face", "fear", "munch", "scared", "scream"] },
+  { "unicode": "😖", "tags": ["confounded", "face"] },
+  { "unicode": "😣", "tags": ["face", "persevere"] },
+  {
+    "unicode": "😡",
+    "tags": ["angry", "face", "mad", "pouting", "rage", "red"]
+  },
+  { "unicode": "😠", "tags": ["angry", "face", "mad"] },
+  {
+    "unicode": "😈",
+    "tags": ["face", "fairy tale", "fantasy", "horns", "smile"]
+  },
+  { "unicode": "👿", "tags": ["demon", "devil", "face", "fantasy", "imp"] },
+  {
+    "unicode": "👾",
+    "tags": ["alien", "creature", "extraterrestrial", "face", "monster", "ufo"]
+  },
+  { "unicode": "🤖", "tags": ["face", "monster"] },
+  {
+    "unicode": "😺",
+    "tags": ["cat", "face", "grinning", "mouth", "open", "smile"]
+  },
+  { "unicode": "😸", "tags": ["cat", "eye", "face", "grin", "smile"] },
+  { "unicode": "😹", "tags": ["cat", "face", "joy", "tear"] },
+  {
+    "unicode": "😻",
+    "tags": ["cat", "eye", "face", "heart", "love", "smile"]
+  },
+  { "unicode": "😼", "tags": ["cat", "face", "ironic", "smile", "wry"] },
+  { "unicode": "😽", "tags": ["cat", "eye", "face", "kiss"] },
+  { "unicode": "🙀", "tags": ["cat", "face", "oh", "surprised", "weary"] },
+  { "unicode": "😿", "tags": ["cat", "cry", "face", "sad", "tear"] },
+  { "unicode": "😾", "tags": ["cat", "face", "pouting"] },
+  { "unicode": "🙈", "tags": ["evil", "face", "forbidden", "monkey", "see"] },
+  {
+    "unicode": "🙉",
+    "tags": ["evil", "face", "forbidden", "hear", "monkey"]
+  },
+  {
+    "unicode": "🙊",
+    "tags": ["evil", "face", "forbidden", "monkey", "speak"]
+  },
+  { "unicode": "💔", "tags": ["break", "broken"] },
+  { "unicode": "❤️", "tags": ["heart"] },
+  { "unicode": "🧡", "tags": ["orange"] },
+  { "unicode": "💛", "tags": ["yellow"] },
+  { "unicode": "💚", "tags": ["green"] },
+  { "unicode": "💙", "tags": ["blue"] },
+  { "unicode": "💜", "tags": ["purple"] },
+  { "unicode": "🤎", "tags": ["brown", "heart"] },
+  { "unicode": "🖤", "tags": ["black", "evil", "wicked"] },
+  { "unicode": "🤍", "tags": ["heart", "white"] }
+]

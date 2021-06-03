@@ -33,8 +33,7 @@ app.use("/conversation", conversation);
 app.use("/message", message);
 app.use("/users", user);
 
-io.on("connection", (socket) => {
-});
+io.on("connection", (socket) => {});
 
 mongoose
   .connect(process.env.MONGODB_KEY, {

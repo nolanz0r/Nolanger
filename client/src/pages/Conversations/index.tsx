@@ -71,19 +71,21 @@ export const Conversations: FC = () => {
             <Loader width="60px" color="#fd4d4d" />
           </div>
         ) : conversations.length ? (
-          conversations.map((conversation: IConversation) => (
-            <ConversationItem
-              key={conversation._id}
-              path={conversation._id}
-              message={sliceText(conversation.lastMessage.text, 24)}
-              name={
-                conversation.author._id === user._id
-                  ? conversation.partner.name
-                  : conversation.author.name
-              }
-              time={formatDate(conversation.lastMessage.createdAt)}
-            />
-          ))
+          <ul className={classes.conversationsList}>
+            {conversations.map((conversation: IConversation) => (
+              <ConversationItem
+                key={conversation._id}
+                path={conversation._id}
+                message={sliceText(conversation.lastMessage.text, 24)}
+                name={
+                  conversation.author._id === user._id
+                    ? conversation.partner.name
+                    : conversation.author.name
+                }
+                time={formatDate(conversation.lastMessage.createdAt).fullDate()}
+              />
+            ))}
+          </ul>
         ) : (
           <div className={classes.empty}>
             <h2>No conversations</h2>
