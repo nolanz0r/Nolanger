@@ -1,14 +1,16 @@
 import { IConversation } from "../../interfaces/IConversation";
+import { IMessage } from "../../interfaces/IMessage";
 import { constants } from "../constants";
 import { IAction } from "../store";
 
 interface ConversationsState {
-    conversations?: IConversation[],
+    conversations: IConversation[],
     loading: boolean
 }
 
 const initialState: ConversationsState = {
-    loading: true
+    loading: true,
+    conversations: []
 };
 
 export const conversationsReducer = (state = initialState, action: IAction): ConversationsState => {
@@ -29,6 +31,33 @@ export const conversationsReducer = (state = initialState, action: IAction): Con
                 ...state,
                 loading: false
             };
+        case constants.CONVERSATIONS_ADD_CONVERSATION:
+            return {
+                ...state,
+                conversations: [action.payload, ...state.conversations]
+            }
+        case constants.CONVERSATIONS_UPDATE_LAST_MESSAGE:
+            const { _id, conversation, text, createdAt, createdBy, updatedAt } = action.payload
+            const lastMessage: IMessage = {
+                _id,
+                text,
+                conversation: conversation._id,
+                createdBy: createdBy._id,
+                createdAt,
+                updatedAt
+            }
+
+            const updated = state.conversations.map(item => {
+                if (item._id === action.payload.conversation._id) {
+                    return { ...item, lastMessage }
+                }
+                return item
+            })
+
+            return {
+                ...state,
+                conversations: updated
+            }
         default:
             return state;
     }

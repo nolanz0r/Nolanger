@@ -13,6 +13,22 @@
   align-items: center;
 }
 
+.leftTime {
+  position: absolute;
+  right: -34px;
+  top: 50%;
+  width: 38px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  transform: translateY(-50%);
+  padding: 2px;
+  color: var(--main);
+  background: var(--secondary);
+  font-size: 10px;
+}
+
 .leftText {
   position: relative;
   margin-left: 14px;
@@ -44,6 +60,22 @@
   flex-direction: row-reverse;
   align-items: center;
   align-self: flex-end;
+}
+
+.rightTime {
+  position: absolute;
+  left: -34px;
+  top: 50%;
+  width: 38px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  transform: translateY(-50%);
+  padding: 2px;
+  color: var(--main);
+  background: var(--secondary);
+  font-size: 10px;
 }
 
 .rightText {

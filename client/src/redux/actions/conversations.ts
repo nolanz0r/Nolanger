@@ -1,5 +1,7 @@
 import axios from "axios";
 import { Dispatch } from "redux";
+import { IConversation } from "../../interfaces/IConversation";
+import { IMessage } from "../../interfaces/IMessage";
 import { sortConversationByDate } from "../../utils/sortConversationByDate";
 import { constants } from "../constants";
 import { IAction } from "../store";
@@ -37,7 +39,6 @@ export const createConversationAction = (author: string, partner: string, messag
 
         axios
             .post("conversation/create", data)
-            .then(res => dispatch(getAllAction()))
             .catch(err => {
                 if (err.response) {
                     dispatch(catchErrorAction(err.response.data.message))
@@ -49,3 +50,17 @@ export const createConversationAction = (author: string, partner: string, messag
             });
     };
 };
+
+export const addConversationAction = (conversation: IConversation) => {
+    return {
+        type: constants.CONVERSATIONS_ADD_CONVERSATION,
+        payload: conversation
+    }
+}
+
+export const updateLastMessage = (message: IMessage) => {
+    return {
+        type: constants.CONVERSATIONS_UPDATE_LAST_MESSAGE,
+        payload: message
+    }
+}

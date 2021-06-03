@@ -40,7 +40,7 @@ class ConversationController {
                 .save()
                 .then((user) => {
                   const payload = {
-                    id: user.id,
+                    _id: user.id,
                     name: user.name,
                     email: user.email,
                   };
@@ -74,7 +74,7 @@ class ConversationController {
       bcrypt.compare(password, user.password).then((isMatch) => {
         if (isMatch) {
           const payload = {
-            id: user.id,
+            _id: user.id,
             name: user.name,
             email: user.email,
           };

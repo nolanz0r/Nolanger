@@ -10,7 +10,7 @@ class MessageController {
     const { conversationId } = req.body;
 
     Message.find({ conversation: conversationId })
-      .populate(["conversation", "created_By"])
+      .populate(["conversation", "createdBy"])
       .exec((err, messages) => {
         if (err) {
           return res.status(404).json({
@@ -26,13 +26,13 @@ class MessageController {
     const postData = {
       text: text,
       conversation: conversationId,
-      created_By: id,
+      createdBy: id,
     };
     const message = new Message(postData);
     message
       .save()
       .then((message) => {
-        message.populate(["conversation", "created_By"], (err, message) => {
+        message.populate(["conversation", "createdBy"], (err, message) => {
           if (err) {
             return res.status(500).json({
               message: err,

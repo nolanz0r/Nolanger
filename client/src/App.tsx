@@ -15,18 +15,21 @@ import { ToastContainer } from "./components/Toast/ToastContainer";
 import { Conversations } from "./pages/Conversations";
 import { Login } from "./pages/auth/Login";
 import { Register } from "./pages/auth/Register";
-
-import classes from "./assets/styles/App.module.css";
 import socket from "./core/socket";
 import { addMessageAction } from "./redux/actions/messages";
-import { getAllAction } from "./redux/actions/conversations";
+import {
+  addConversationAction,
+  updateLastMessage,
+} from "./redux/actions/conversations";
+
+import classes from "./assets/styles/App.module.css";
 
 axios.defaults.baseURL = process.env.REACT_APP_API_KEY;
 
 export const App: FC = () => {
   const dispatch = useDispatch<Dispatch<any>>();
   const history = useHistory();
-  const { loggedIn } = useSelector((state: any) => state.auth);
+  const { loggedIn, user } = useSelector((state: any) => state.auth);
   const { error } = useSelector((state: any) => state.errors);
 
   useEffect(() => {
@@ -42,7 +45,11 @@ export const App: FC = () => {
     }
     socket.on("SERVER:NEW_MESSAGE", (message) => {
       dispatch(addMessageAction(message));
-      dispatch(getAllAction());
+      dispatch(updateLastMessage(message));
+    });
+
+    socket.on("SERVER:CONVERSATION_CREATED", (conversation) => {
+      dispatch(addConversationAction(conversation));
     });
   }, []);
 

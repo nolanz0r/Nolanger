@@ -1,9 +1,12 @@
-const express = require("express");
-const router = express.Router();
+const { Router } = require("express");
+const router = new Router();
+const ConversationController = require("../controllers/conversation.controller");
 
-const conversationController = require("../controllers/conversation.controller");
+module.exports = (io) => {
+  const conversationController = new ConversationController(io);
 
-router.post("/create", conversationController.create);
-router.get("/getAll", conversationController.getAll);
+  router.post("/create", (...args) => conversationController.create(...args));
+  router.get("/getAll", conversationController.getAll);
 
-module.exports = router;
+  return router;
+};

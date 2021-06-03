@@ -7,7 +7,7 @@ const MessageSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "conversations",
     },
-    created_By: { type: Schema.Types.ObjectId, ref: "users", require: true },
+    createdBy: { type: Schema.Types.ObjectId, ref: "users", require: true },
   },
   {
     timestamps: true,

@@ -14,6 +14,7 @@ import { Loader } from "../../components/Loader";
 
 import classes from "./Chat.module.css";
 import { IConversation } from "../../interfaces/IConversation";
+import socket from "../../core/socket";
 
 export const Chat: FC = () => {
   const bottomRef = useRef<HTMLUListElement>(null);
@@ -23,6 +24,7 @@ export const Chat: FC = () => {
   const { messages, loading } = useSelector((state: any) => state.messages);
   const { conversations } = useSelector((state: any) => state.conversations);
   const { id } = useParams<{ id: string }>();
+  const [status, setStatus] = useState<string>("Offline");
 
   const inputChangeHandler = (e: ChangeEvent<any>) => {
     setMessage(e.target.value);
@@ -30,7 +32,7 @@ export const Chat: FC = () => {
 
   const sendMessageHandler = (e: FormEvent<HTMLElement>) => {
     e.preventDefault();
-    message.length !== 0 && dispatch(createAction(user.id, id, message));
+    message.length !== 0 && dispatch(createAction(user._id, id, message));
 
     setMessage("");
   };
@@ -66,13 +68,13 @@ export const Chat: FC = () => {
                 <p className={classes.name}>
                   {conversations.map((item: IConversation) => {
                     if (item._id === id) {
-                      return item.author._id === user.id
+                      return item.author._id === user._id
                         ? item.partner.name
                         : item.author.name;
                     }
                   })}
                 </p>
-                <span className={classes.status}>Online</span>
+                <span className={classes.status}>{status}</span>
               </div>
             </div>
             <button className={classes.icon}>
@@ -83,10 +85,11 @@ export const Chat: FC = () => {
             {messages.map((message: IMessage) => (
               <MessageItem
                 key={message._id}
-                mine={user.id === message.created_By._id}
+                mine={user._id === message.createdBy._id}
                 avatar="https://images.unsplash.com/photo-1556103255-4443dbae8e5a?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cGhvdG9ncmFwaGVyfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80"
-                name={message.created_By.name}
+                name={message.createdBy.name}
                 text={message.text}
+                time={message.createdAt}
               />
             ))}
           </ul>

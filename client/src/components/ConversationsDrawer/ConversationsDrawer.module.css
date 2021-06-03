@@ -73,6 +73,12 @@
   align-items: center;
 }
 
+.searchInfo {
+  display: flex;
+  gap: 10px;
+  font-weight: 700;
+}
+
 .input {
   width: 20vw;
   background: var(--main);

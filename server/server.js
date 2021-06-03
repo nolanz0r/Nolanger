@@ -24,13 +24,17 @@ app.use(authMiddleware);
 
 //routes
 const auth = require("./routes/auth.route");
-const conversation = require("./routes/conversation.route");
+const conversation = require("./routes/conversation.route")(io);
 const message = require("./routes/message.route")(io);
 const user = require("./routes/user.route");
+
 app.use("/auth", auth);
 app.use("/conversation", conversation);
 app.use("/message", message);
 app.use("/users", user);
+
+io.on("connection", (socket) => {
+});
 
 mongoose
   .connect(process.env.MONGODB_KEY, {

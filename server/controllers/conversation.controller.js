@@ -2,11 +2,15 @@ const Conversation = require("../models/conversation.model");
 const Message = require("../models/message.model");
 
 class ConversationController {
+  constructor(io) {
+    this.io = io;
+  }
+
   getAll(req, res) {
-    const { id } = req.user;
+    const { _id } = req.user;
 
     Conversation.find()
-      .or([{ author: id }, { partner: id }])
+      .or([{ author: _id }, { partner: _id }])
       .populate(["author", "partner"])
       .populate({
         path: "lastMessage",
@@ -50,7 +54,7 @@ class ConversationController {
           conversation.save().then((createdConversation) => {
             const messageText = new Message({
               text: message,
-              created_By: author,
+              createdBy: author,
               conversation: createdConversation._id,
             });
             messageText
@@ -59,6 +63,13 @@ class ConversationController {
                 createdConversation.lastMessage = messageText._id;
                 createdConversation.save().then(() => {
                   res.json(createdConversation);
+
+                  createdConversation.populate(
+                    ["author", "partner", "lastMessage"],
+                    (err, conversation) => {
+                      this.io.emit("SERVER:CONVERSATION_CREATED", conversation);
+                    }
+                  );
                 });
               })
               .catch((err) => {
@@ -71,4 +82,4 @@ class ConversationController {
   }
 }
 
-module.exports = new ConversationController();
+module.exports = ConversationController;

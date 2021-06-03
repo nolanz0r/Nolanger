@@ -75,9 +75,9 @@ export const Conversations: FC = () => {
             <ConversationItem
               key={conversation._id}
               path={conversation._id}
-              message={sliceText(conversation.lastMessage.text, 32)}
+              message={sliceText(conversation.lastMessage.text, 24)}
               name={
-                conversation.author._id === user.id
+                conversation.author._id === user._id
                   ? conversation.partner.name
                   : conversation.author.name
               }

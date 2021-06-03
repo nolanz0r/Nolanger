@@ -50,7 +50,7 @@ export const ConversationsDrawer: FC<DrawerProps> = ({ state, close }) => {
     e.preventDefault();
 
     if (modalUser) {
-      dispatch(createConversationAction(user.id, modalUser._id, messageText));
+      dispatch(createConversationAction(user._id, modalUser._id, messageText));
     }
     setOpenModal(false);
     setMessageText("");
@@ -107,7 +107,7 @@ export const ConversationsDrawer: FC<DrawerProps> = ({ state, close }) => {
         <Search
           onSubmit={searchSubmitHandler}
           onChange={searchChangeHandler}
-          disabled={searchText.length === 0}
+          disabled={searchText.length === 0 || loading}
         />
         {loading ? (
           <div className={classes.searchListLoader}>
@@ -143,7 +143,13 @@ export const ConversationsDrawer: FC<DrawerProps> = ({ state, close }) => {
                 Next
               </Button>
             </div>
-            <span>{page + 1 + "/" + Math.ceil(searchLength / limit)}</span>
+            <div className={classes.searchInfo}>
+              <span>
+                page: {page + 1 + "/" + Math.ceil(searchLength / limit)}
+              </span>
+              <span>|</span>
+              <span>results: {searchLength}</span>
+            </div>
           </>
         )}
       </div>
