@@ -7,6 +7,7 @@ import {
   useState,
 } from "react";
 import emojis from "../../emoji.json";
+import { outsideClick } from "../../utils/outsideClick";
 
 import classes from "./EmojiMenu.module.css";
 
@@ -23,17 +24,9 @@ export const EmojiMenu: FC<IEmojiMenu> = ({ onClick }) => {
   };
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        setOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    outsideClick(menuRef, setOpen);
   }, [menuRef]);
+  
   return (
     <div className={classes.emojis}>
       <span className={classes.emoji} onClick={openEmojisHandler}>
