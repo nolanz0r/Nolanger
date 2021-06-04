@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const cors = require("cors");
 const express = require("express");
+const path = require("path");
 
 const app = require("express")();
 const server = require("http").createServer(app);
@@ -43,6 +44,12 @@ mongoose
   })
   .then(() => console.log("MongoDB successfully connected"))
   .catch((err) => console.log(err));
+
+app.use(express.static(path.resolve(__dirname, "../../client/build")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "../../client/build", "index.html"));
+});
 
 server.listen(PORT, (err) => {
   if (err) {
