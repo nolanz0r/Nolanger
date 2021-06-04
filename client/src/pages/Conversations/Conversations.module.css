@@ -34,7 +34,7 @@
 }
 
 .conversationsList {
-  overflow-y: scroll;
+  overflow-y: auto;
   width: 100%;
   height: 80%;
   border-bottom: 1px solid #bbbbbb;

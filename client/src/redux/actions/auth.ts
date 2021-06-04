@@ -3,7 +3,7 @@ import jwt_decode from "jwt-decode";
 import { Dispatch } from "react";
 import { IAuth } from "../../interfaces/IAuth";
 import { IUser } from "../../interfaces/IUser";
-import { setAuthToken } from "../../utils/setAuthToken";
+import { setAuthToken } from "../../core/axios";
 import { constants } from "../constants";
 import { IAction } from "../store";
 

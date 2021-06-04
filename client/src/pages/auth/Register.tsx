@@ -7,7 +7,7 @@ import { Button } from "../../components/Button";
 import { registerAction } from "../../redux/actions/auth";
 
 import classes from "./Auth.module.css";
-import { ToastContainer } from "../../components/Toast/ToastContainer";
+import { ToastContainer } from "../../containers/Toast/ToastContainer";
 
 interface IFormInputs {
   name: string;

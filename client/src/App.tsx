@@ -1,7 +1,6 @@
 import { FC, useEffect } from "react";
 import jwt_decode from "jwt-decode";
 import { Redirect, Route, Switch, useHistory } from "react-router-dom";
-import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch } from "redux";
 
@@ -9,9 +8,9 @@ import { logoutAction, setCurrentUser } from "./redux/actions/auth";
 import { IUser } from "./interfaces/IUser";
 import { Navbar } from "./components/Navbar";
 import { Chat } from "./pages/Chat";
-import { setAuthToken } from "./utils/setAuthToken";
+import { setAuthToken } from "./core/axios";
 import { isAccessTokenExpired } from "./utils/isAccessTokenExpired";
-import { ToastContainer } from "./components/Toast/ToastContainer";
+import { ToastContainer } from "./containers/Toast/ToastContainer";
 import { Conversations } from "./pages/Conversations";
 import { Login } from "./pages/auth/Login";
 import { Register } from "./pages/auth/Register";
@@ -24,12 +23,10 @@ import {
 
 import classes from "./assets/styles/App.module.css";
 
-axios.defaults.baseURL = process.env.REACT_APP_API_KEY;
-
 export const App: FC = () => {
   const dispatch = useDispatch<Dispatch<any>>();
   const history = useHistory();
-  const { loggedIn, user } = useSelector((state: any) => state.auth);
+  const { loggedIn } = useSelector((state: any) => state.auth);
   const { error } = useSelector((state: any) => state.errors);
 
   useEffect(() => {

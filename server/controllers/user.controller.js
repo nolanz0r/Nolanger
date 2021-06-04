@@ -2,10 +2,6 @@ const User = require("../models/user.model");
 const searchRegex = require("../utils/searchRegex");
 
 class UserController {
-  constructor(io) {
-    this.io = io;
-  }
-
   search(req, res) {
     const { search } = req.query;
 

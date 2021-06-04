@@ -1,12 +1,4 @@
-import {
-  ChangeEvent,
-  FC,
-  FormEvent,
-  SyntheticEvent,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { ChangeEvent, FC, FormEvent, useEffect, useRef, useState } from "react";
 import { AiOutlineSend, AiOutlinePaperClip } from "react-icons/ai";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import { HiOutlineArrowLeft } from "react-icons/hi";
@@ -22,7 +14,7 @@ import { Loader } from "../../components/Loader";
 
 import classes from "./Chat.module.css";
 import { IConversation } from "../../interfaces/IConversation";
-import { EmojiMenu } from "../../components/EmojiMenu";
+import { EmojiMenu } from "../../containers/EmojiMenu";
 
 export const Chat: FC = () => {
   const bottomRef = useRef<HTMLUListElement>(null);
