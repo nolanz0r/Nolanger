@@ -1,4 +1,4 @@
-# Nolager - messenger application
+# Nolanger - messenger application
 
 ## Stack: ##
 
