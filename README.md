@@ -1,5 +1,4 @@
 # Nolager - messenger application
-Live demo - https://nolanger.vercel.app
 
 ## Stack: ##
 
